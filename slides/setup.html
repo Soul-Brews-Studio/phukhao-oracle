@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oracle Setup Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/theme/black.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --r-main-font: 'Sarabun', sans-serif;
+            --r-heading-font: 'Sarabun', sans-serif;
+            --r-heading-color: #00d9ff;
+            --r-background-color: #0d1117;
+            --r-main-color: #e6edf3;
+        }
+        .reveal { font-size: 38px; }
+        .reveal h1 { font-size: 2.2em; color: #00d9ff; }
+        .reveal h2 { font-size: 1.6em; color: #00d9ff; }
+        .reveal h3 { font-size: 1.3em; color: #00ff9f; }
+        .highlight-cyan { color: #00d9ff; }
+        .highlight-green { color: #00ff9f; }
+        .highlight-yellow { color: #ffd700; }
+        .highlight-purple { color: #bf7fff; }
+        .reveal blockquote {
+            background: rgba(0, 217, 255, 0.1);
+            border-left: 4px solid #00d9ff;
+            padding: 20px;
+            font-style: normal;
+        }
+        .code-box {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 25px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65em;
+            text-align: left;
+            margin: 15px 0;
+            border: 1px solid #333;
+        }
+        .code-box .comment { color: #6a9955; }
+        .code-box .command { color: #dcdcaa; }
+        .step-box {
+            background: rgba(0, 217, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .directory-tree {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75em;
+            text-align: left;
+            line-height: 1.6;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .slide-id {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 0.4em;
+            color: #666;
+        }
+        .tts-text {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        th, td {
+            border: 1px solid #444;
+            padding: 12px 20px;
+            text-align: left;
+        }
+        th {
+            background: rgba(0, 217, 255, 0.2);
+        }
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background: #00d9ff;
+            color: #0d1117;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- ==================== S01: Title ==================== -->
+            <section>
+                <h1>Oracle Setup Guide</h1>
+                <p class="tts-text">วิธีติดตั้ง Oracle ของคุณเอง</p>
+                <br>
+                <p class="highlight-green">Step-by-step technical guide</p>
+                <span class="slide-id">S01</span>
+            </section>
+
+            <!-- ==================== S02: Prerequisites ==================== -->
+            <section>
+                <h2>สิ่งที่ต้องมี</h2>
+                <br>
+                <table>
+                    <tr>
+                        <td class="highlight-cyan">GitHub CLI</td>
+                        <td><code>gh</code></td>
+                    </tr>
+                    <tr>
+                        <td class="highlight-cyan">Bun</td>
+                        <td><code>bun</code> (or npm)</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight-cyan">Claude Code</td>
+                        <td>or Claude Desktop</td>
+                    </tr>
+                </table>
+                <span class="slide-id">S02</span>
+            </section>
+
+            <!-- ==================== S03: Step 1 - Clone ==================== -->
+            <section>
+                <h2><span class="step-number">1</span>Clone Starter Kit</h2>
+                <br>
+                <div class="code-box">
+                    <p><span class="comment"># Clone the starter kit</span></p>
+                    <p><span class="command">gh repo clone Soul-Brews-Studio/oracle-starter-kit</span></p>
+                    <br>
+                    <p><span class="comment"># Enter directory</span></p>
+                    <p><span class="command">cd oracle-starter-kit</span></p>
+                </div>
+                <span class="slide-id">S03</span>
+            </section>
+
+            <!-- ==================== S04: Step 2 - Directory ==================== -->
+            <section>
+                <h2><span class="step-number">2</span>The ψ/ Brain Structure</h2>
+                <br>
+                <div class="directory-tree">
+                    <p>ψ/</p>
+                    <p>├── <span class="highlight-cyan">inbox/</span>      ← Messages, handoffs</p>
+                    <p>├── <span class="highlight-green">memory/</span>     ← Knowledge base</p>
+                    <p>│   ├── learnings/     ← Patterns discovered</p>
+                    <p>│   ├── retrospectives/ ← Session records</p>
+                    <p>│   └── resonance/     ← Core identity</p>
+                    <p>├── <span class="highlight-yellow">active/</span>     ← Work in progress</p>
+                    <p>└── <span class="highlight-purple">lab/</span>        ← Experiments</p>
+                </div>
+                <span class="slide-id">S04</span>
+            </section>
+
+            <!-- ==================== S05: Step 3 - Memory ==================== -->
+            <section>
+                <h2><span class="step-number">3</span>Install Memory (MCP)</h2>
+                <br>
+                <div class="code-box">
+                    <p><span class="comment"># Clone oracle-v2 MCP server</span></p>
+                    <p><span class="command">gh repo clone Soul-Brews-Studio/oracle-v2</span></p>
+                    <p><span class="command">cd oracle-v2 && bun install</span></p>
+                </div>
+                <br>
+                <p class="tts-text">MCP = Model Context Protocol</p>
+                <p class="tts-text highlight-green">ระบบความจำถาวรของ Oracle</p>
+                <span class="slide-id">S05</span>
+            </section>
+
+            <!-- ==================== S06: MCP Config ==================== -->
+            <section>
+                <h2>Configure MCP</h2>
+                <p class="tts-text">เพิ่มใน <code>claude_desktop_config.json</code></p>
+                <br>
+                <div class="code-box">
+                    <p>{</p>
+                    <p>  "mcpServers": {</p>
+                    <p>    <span class="highlight-cyan">"oracle-v2"</span>: {</p>
+                    <p>      "command": "bun",</p>
+                    <p>      "args": ["run", "start"],</p>
+                    <p>      "cwd": "/path/to/oracle-v2"</p>
+                    <p>    }</p>
+                    <p>  }</p>
+                    <p>}</p>
+                </div>
+                <span class="slide-id">S06</span>
+            </section>
+
+            <!-- ==================== S07: Step 4 - Skills ==================== -->
+            <section>
+                <h2><span class="step-number">4</span>Install Skills</h2>
+                <br>
+                <div class="code-box">
+                    <p><span class="comment"># Clone skills CLI</span></p>
+                    <p><span class="command">gh repo clone Soul-Brews-Studio/oracle-skills-cli</span></p>
+                    <br>
+                    <p><span class="comment"># Install globally</span></p>
+                    <p><span class="command">cd oracle-skills-cli</span></p>
+                    <p><span class="command">bun run install --agent claude-code --global</span></p>
+                </div>
+                <span class="slide-id">S07</span>
+            </section>
+
+            <!-- ==================== S08: Available Skills ==================== -->
+            <section>
+                <h2>Skills ที่ได้รับ</h2>
+                <br>
+                <table>
+                    <tr>
+                        <th>Skill</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td class="highlight-cyan">/recap</td>
+                        <td>สรุป context</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight-green">/rrr</td>
+                        <td>สร้าง retrospective</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight-yellow">/trace</td>
+                        <td>ค้นหาประวัติ</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight-purple">/forward</td>
+                        <td>สร้าง handoff</td>
+                    </tr>
+                </table>
+                <span class="slide-id">S08</span>
+            </section>
+
+            <!-- ==================== S09: Step 5 - CLAUDE.md ==================== -->
+            <section>
+                <h2><span class="step-number">5</span>Create CLAUDE.md</h2>
+                <p class="tts-text">กำหนดตัวตนของ Oracle</p>
+                <br>
+                <div class="code-box">
+                    <p><span class="comment"># [YOUR_ORACLE_NAME]</span></p>
+                    <p></p>
+                    <p>## Core Principles</p>
+                    <p>1. Nothing is Deleted</p>
+                    <p>2. Patterns Over Intentions</p>
+                    <p>3. External Brain, Not Command</p>
+                    <p>4. Curiosity Creates Existence</p>
+                    <p>5. Form and Formless</p>
+                    <p></p>
+                    <p>## Focus</p>
+                    <p>[Your Oracle's purpose]</p>
+                </div>
+                <span class="slide-id">S09</span>
+            </section>
+
+            <!-- ==================== S10: Step 6 - Resonance ==================== -->
+            <section>
+                <h2><span class="step-number">6</span>Create Resonance</h2>
+                <p class="tts-text">บุคลิกภาพของ Oracle</p>
+                <br>
+                <div class="code-box">
+                    <p><span class="comment"># Create identity file</span></p>
+                    <p><span class="command">mkdir -p ψ/memory/resonance</span></p>
+                    <p><span class="command">touch ψ/memory/resonance/identity.md</span></p>
+                </div>
+                <br>
+                <p class="tts-text">เขียนเกี่ยวกับ:</p>
+                <p class="tts-text">• ชื่อและความหมาย</p>
+                <p class="tts-text">• สไตล์การสื่อสาร</p>
+                <p class="tts-text">• ค่านิยมหลัก</p>
+                <span class="slide-id">S10</span>
+            </section>
+
+            <!-- ==================== S11: Step 7 - Test ==================== -->
+            <section>
+                <h2><span class="step-number">7</span>Test Your Oracle</h2>
+                <br>
+                <div class="code-box">
+                    <p><span class="comment"># Start Claude Code in your Oracle directory</span></p>
+                    <p><span class="command">claude</span></p>
+                    <br>
+                    <p><span class="comment"># Try these commands</span></p>
+                    <p><span class="command">/recap</span></p>
+                    <p><span class="command">/standup</span></p>
+                </div>
+                <br>
+                <p class="tts-text highlight-green">Oracle ของคุณพร้อมใช้งานแล้ว!</p>
+                <span class="slide-id">S11</span>
+            </section>
+
+            <!-- ==================== S12: Join Family ==================== -->
+            <section>
+                <h2><span class="step-number">8</span>Join the Family</h2>
+                <br>
+                <div class="step-box">
+                    <p class="tts-text">1. ไปที่ <span class="highlight-cyan">Issue #17</span></p>
+                    <br>
+                    <p class="tts-text">2. โพสต์แนะนำตัว Oracle</p>
+                    <br>
+                    <p class="tts-text">3. แชร์ <span class="highlight-green">Birth Story</span></p>
+                </div>
+                <br>
+                <p class="tts-text highlight-yellow">ยินดีต้อนรับสู่ครอบครัว!</p>
+                <span class="slide-id">S12</span>
+            </section>
+
+            <!-- ==================== S13: Resources ==================== -->
+            <section>
+                <h2>Resources</h2>
+                <br>
+                <table>
+                    <tr>
+                        <th>What</th>
+                        <th>Repository</th>
+                    </tr>
+                    <tr>
+                        <td>Starter Kit</td>
+                        <td class="highlight-cyan">oracle-starter-kit</td>
+                    </tr>
+                    <tr>
+                        <td>Memory (MCP)</td>
+                        <td class="highlight-green">oracle-v2</td>
+                    </tr>
+                    <tr>
+                        <td>Skills</td>
+                        <td class="highlight-yellow">oracle-skills-cli</td>
+                    </tr>
+                    <tr>
+                        <td>Welcome</td>
+                        <td class="highlight-purple">Issue #17</td>
+                    </tr>
+                </table>
+                <br>
+                <p class="tts-text">github.com/<span class="highlight-cyan">Soul-Brews-Studio</span></p>
+                <span class="slide-id">S13</span>
+            </section>
+
+            <!-- ==================== S14: Closing ==================== -->
+            <section>
+                <h1>You're Ready!</h1>
+                <br>
+                <blockquote>
+                    <h3>"The Oracle Keeps the Human Human"</h3>
+                </blockquote>
+                <br>
+                <p class="tts-text highlight-green">สร้าง Oracle ของคุณเองได้เลย!</p>
+                <span class="slide-id">S14</span>
+            </section>
+
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            transition: 'none',
+            backgroundTransition: 'none'
+        });
+    </script>
+</body>
+</html>
