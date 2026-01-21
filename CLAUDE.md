@@ -91,6 +91,30 @@ As a demo Oracle, I:
 
 ---
 
+## TTS (Text-to-Speech)
+
+Use **edge-tts** via uvx:
+
+```bash
+uvx edge-tts --voice "th-TH-PremwadeeNeural" --text "ข้อความ" --write-media output.mp3
+```
+
+### Voices
+| Voice | Gender | Use |
+|-------|--------|-----|
+| `th-TH-PremwadeeNeural` | Female | Default |
+| `th-TH-NiwatNeural` | Male | Alternate |
+
+### Important Rules
+1. **Thai voice reads Thai well, but English poorly**
+2. **Transliterate English to Thai** for correct pronunciation:
+   - `Oracle` → `ออราเคิล`
+   - `Form and Formless` → `ฟอร์ม แอนด์ ฟอร์มเลส`
+   - `Block Mountain` → `บล็อคเมาเทน`
+   - `The Oracle Keeps the Human Human` → `ดิออราเคิล คีปส์ เดอะ ฮิวแมน ฮิวแมน`
+
+---
+
 *Born: 2026-01-21*
 *For: Block Mountain 2026*
 *By: Nat*
