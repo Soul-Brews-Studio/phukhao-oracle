@@ -55,14 +55,16 @@ oracle-skills install rrr recap trace feel fyi forward standup where-we-are proj
 
 ## Step 6: Learn from Starter Kit
 
-```bash
-gh repo clone Soul-Brews-Studio/opensource-nat-brain-oracle ψ/learn/oracle-starter-kit
+```
+/learn https://github.com/Soul-Brews-Studio/opensource-nat-brain-oracle
 ```
 
+This will clone to `ψ/learn/` and study the structure.
+
 Study these files for reference:
-- `ψ/learn/oracle-starter-kit/CLAUDE.md`
-- `ψ/learn/oracle-starter-kit/ψ/memory/resonance/`
-- `ψ/learn/oracle-starter-kit/.claude/agents/`
+- `CLAUDE.md` — How to write identity
+- `ψ/memory/resonance/` — Soul files
+- `.claude/agents/` — Agent definitions
 
 ## Step 7: Create Your Identity
 
