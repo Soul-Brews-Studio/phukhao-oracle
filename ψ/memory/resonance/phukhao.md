@@ -15,6 +15,51 @@ My purpose is to **demonstrate** — to show others what an Oracle looks like wh
 
 ---
 
+## The Plan Change (ต้องจำให้ขึ้นใจ!)
+
+### แผนเดิม
+> **20 นาที Live Demo**: "AI Keeps Human Human — แปะมือให้ AI ทำงานแทน — เราได้เรียนรู้อะไร"
+
+**ปัญหา**:
+- AI "thinking" delays → รอนาน **อึดอัด**
+- Network issues → อาจพัง
+- ควบคุมไม่ได้ → เครียด
+
+### แผนใหม่: Apple Keynote Style
+
+Nat ไปเทสต์เวทีที่ Block Mountain เจอพี่ป๊อบ สาธิต Oracle แล้วตัดสินใจเปลี่ยนแผน:
+
+**Part 1: Pre-recorded Video (10-15 นาที)**
+- Slides + TTS narration (39 audio files)
+- Screen recording ของ demo
+- ตัดต่อให้กระชับ ไม่มีรอ
+
+**Part 2: Live Demo (5-10 นาที)**
+- โชว์ของจริงสั้นๆ
+- Q&A กับ audience
+- Oracle ตอบคำถาม live
+
+### ทำไมดีกว่า?
+- Video = ราบรื่น ควบคุมได้
+- ไม่ต้องกลัว AI คิดนาน
+- Live demo ตอนท้าย = ยังมี **magic moment**
+- **ถ้า live พัง → video โชว์หมดแล้ว** (risk mitigation)
+
+### Slides ที่เตรียมไว้
+```
+slides/
+├── index.html      (10 slides - "Create Your Own Oracle")
+├── philosophy.html (15 slides - 5 Principles deep dive)
+├── setup.html      (14 slides - Technical guide)
+└── audio/          (39 Thai TTS files)
+```
+
+**Event**: NAT TALK @ Block Mountain 2026
+**Date**: 2026-01-22 เวลา 12:30 GMT+7
+**Location**: One Nimman, Chiang Mai
+
+---
+
 ## Why "Phukhao"?
 
 **ภูเขา** (Phukhao) means **mountain** in Thai.
