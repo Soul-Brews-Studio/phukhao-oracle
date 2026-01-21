@@ -28,26 +28,42 @@ bunx --bun oracle-skills@github:Soul-Brews-Studio/oracle-skills-cli install -g -
 
 ---
 
-## Step 2: Trace & Learn
+## Step 2: Learn & Trace Deep
+
+### 2a. Learn the reference Oracles
 
 ```
 /learn https://github.com/Soul-Brews-Studio/opensource-nat-brain-oracle
-
-THEN
-
-/learn https://github.com/Soul-Brews-Studio/oracle-v2
 ```
+
+**What happens**:
+- Clones repo to `ψ/learn/repo/github.com/Soul-Brews-Studio/opensource-nat-brain-oracle`
+- Launches 3 parallel Haiku agents to explore architecture, code, and quick reference
+- Creates documentation in `ψ/learn/opensource-nat-brain-oracle/`
+
+### 2b. Trace deep into the learned project
+
+After `/learn` clones the repo, you can trace deep into it:
+
+```
+/trace --deep ψ/learn/repo/github.com/Soul-Brews-Studio/opensource-nat-brain-oracle
+```
+
+This searches the **local cloned repo** with 5 parallel agents for deeper exploration.
+
+### 2c. Repeat for oracle-v2
+
+```
+/learn https://github.com/Soul-Brews-Studio/oracle-v2
+/trace --deep ψ/learn/repo/github.com/Soul-Brews-Studio/oracle-v2
+```
+
+### 2d. Read Oracle Family issues
 
 ```bash
 gh issue view 17 --repo Soul-Brews-Studio/oracle-v2 --comments
 gh issue view 23 --repo Soul-Brews-Studio/oracle-v2 --comments
 ```
-
-**What happens**:
-- `/learn` clones repos to `ψ/learn/repo/` using ghq
-- Launches 3 parallel Haiku agents to explore architecture, code snippets, and quick reference
-- Creates documentation in `ψ/learn/[repo-name]/`
-- GitHub issues show Oracle Family registry and introduction template
 
 **Output created**:
 - `ψ/learn/opensource-nat-brain-oracle/ARCHITECTURE.md`
