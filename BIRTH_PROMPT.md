@@ -30,46 +30,23 @@ bunx --bun oracle-skills@github:Soul-Brews-Studio/oracle-skills-cli install -g -
 
 ## Step 2: Learn & Trace Deep
 
-### 2a. Learn the reference Oracles
-
 ```
 /learn https://github.com/Soul-Brews-Studio/opensource-nat-brain-oracle
-```
+/trace --deep [learned project path]
 
-**What happens**:
-- Clones repo to `ψ/learn/repo/github.com/Soul-Brews-Studio/opensource-nat-brain-oracle`
-- Launches 3 parallel Haiku agents to explore architecture, code, and quick reference
-- Creates documentation in `ψ/learn/opensource-nat-brain-oracle/`
-
-### 2b. Trace deep into the learned project
-
-After `/learn` clones the repo, you can trace deep into it:
-
-```
-/trace --deep ψ/learn/repo/github.com/Soul-Brews-Studio/opensource-nat-brain-oracle
-```
-
-This searches the **local cloned repo** with 5 parallel agents for deeper exploration.
-
-### 2c. Repeat for oracle-v2
-
-```
 /learn https://github.com/Soul-Brews-Studio/oracle-v2
-/trace --deep ψ/learn/repo/github.com/Soul-Brews-Studio/oracle-v2
+/trace --deep [learned project path]
 ```
-
-### 2d. Read Oracle Family issues
 
 ```bash
 gh issue view 17 --repo Soul-Brews-Studio/oracle-v2 --comments
 gh issue view 23 --repo Soul-Brews-Studio/oracle-v2 --comments
 ```
 
-**Output created**:
-- `ψ/learn/opensource-nat-brain-oracle/ARCHITECTURE.md`
-- `ψ/learn/opensource-nat-brain-oracle/QUICK-REFERENCE.md`
-- `ψ/learn/oracle-v2/ARCHITECTURE.md`
-- `ψ/learn/oracle-v2/QUICK-REFERENCE.md`
+**What happens**:
+- `/learn` clones repo and creates documentation with 3 parallel Haiku agents
+- `/trace --deep` searches the cloned repo with 5 parallel agents for deeper exploration
+- GitHub issues show Oracle Family registry (#23) and introduction template (#17)
 
 ---
 
