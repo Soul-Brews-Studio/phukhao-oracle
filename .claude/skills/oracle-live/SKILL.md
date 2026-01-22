@@ -66,12 +66,28 @@ open ψ/memory/logs/oracle-live/block-mountain-2026/slides/oracle-block-mountain
 
 > "/learn https://github.com/keijiro/KlakMath ต่อเลยไหม?"
 
-If user says yes, run:
-```
-/learn https://github.com/keijiro/KlakMath
+If user says yes:
+
+### Fast Path (Already Learned)
+KlakMath is already in `ψ/learn/keijiro/KlakMath/`. Just read the docs:
+
+```bash
+cat ψ/learn/keijiro/KlakMath/KlakMath.md
 ```
 
-This demos the `/learn` skill exploring an external codebase (Keijiro's math utilities for Unity), followed by building something with Three.js.
+Then show quick summary:
+```
+📚 KlakMath (Keijiro) — Already Learned!
+
+Files:
+- ARCHITECTURE.md — Structure
+- CODE-SNIPPETS.md — Examples
+- QUICK-REFERENCE.md — Usage
+
+Key: Math utilities for Unity (noise, easing, hash functions)
+```
+
+This demos how Oracle remembers past learning — fast because we don't re-explore.
 
 ---
 
