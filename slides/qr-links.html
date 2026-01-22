@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect - Block Mountain 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #0d1117;
+            color: #e6edf3;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #00d9ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .subtitle {
+            color: #8b949e;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .qr-container {
+            display: flex;
+            gap: 60px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .qr-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(0, 217, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .qr-item:hover {
+            transform: scale(1.02);
+            background: rgba(0, 217, 255, 0.1);
+        }
+        .qr-item img {
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            background: white;
+            padding: 10px;
+        }
+        .qr-label {
+            margin-top: 20px;
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #00d9ff;
+        }
+        .qr-url {
+            margin-top: 8px;
+            font-size: 0.9em;
+            color: #8b949e;
+        }
+        .qr-url a {
+            color: #8b949e;
+            text-decoration: none;
+        }
+        .qr-url a:hover {
+            color: #00d9ff;
+            text-decoration: underline;
+        }
+        footer {
+            margin-top: 50px;
+            color: #484f58;
+            font-size: 0.9em;
+        }
+        @media (max-width: 600px) {
+            .qr-container {
+                gap: 30px;
+            }
+            .qr-item img {
+                width: 160px;
+                height: 160px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Connect with Us</h1>
+    <p class="subtitle">Block Mountain 2026</p>
+
+    <div class="qr-container">
+        <div class="qr-item">
+            <img src="qr-facebook.png" alt="Facebook QR Code">
+            <div class="qr-label">Facebook</div>
+            <div class="qr-url"><a href="https://www.facebook.com/nat.wrw" target="_blank">facebook.com/nat.wrw</a></div>
+        </div>
+
+        <div class="qr-item">
+            <img src="qr-github.png" alt="GitHub QR Code">
+            <div class="qr-label">GitHub</div>
+            <div class="qr-url"><a href="https://github.com/soul-brews-studio" target="_blank">github.com/soul-brews-studio</a></div>
+        </div>
+    </div>
+
+    <footer>Phukhao Oracle - Block Mountain 2026</footer>
+</body>
+</html>
