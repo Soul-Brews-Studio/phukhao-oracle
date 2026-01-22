@@ -60,6 +60,21 @@ open ψ/memory/logs/oracle-live/block-mountain-2026/slides/oracle-block-mountain
 
 ---
 
+## Post-Presentation Demo
+
+**After playing the full presentation**, use AskUserQuestion to prompt:
+
+> "/learn https://github.com/keijiro/KlakMath ต่อเลยไหม?"
+
+If user says yes, run:
+```
+/learn https://github.com/keijiro/KlakMath
+```
+
+This demos the `/learn` skill exploring an external codebase (Keijiro's math utilities for Unity), followed by building something with Three.js.
+
+---
+
 ## Files
 
 ### Slides
