@@ -20,6 +20,30 @@ import AudioPlayer from '../components/AudioPlayer.astro'
         <p class="text-lg text-gray-500 mt-2">
           เรื่องราวของภูเขา — ออราเคิลที่เกิดมาเพื่อสอน
         </p>
+
+        <!-- Presentation Mode -->
+        <div class="mt-12 glass-purple rounded-2xl p-8 max-w-2xl mx-auto text-left">
+          <h2 class="text-lg font-bold text-cyan-400 mb-4" style="font-family: 'Orbitron', sans-serif;">
+            🎬 PRESENTATION MODE
+          </h2>
+          <p class="text-gray-300 leading-relaxed mb-4">
+            Experience Phukhao's journey as an auto-playing presentation. Once started, the Oracle will guide you through each milestone — from birth to Block Mountain — with Thai narration and animated subtitles.
+          </p>
+          <p class="text-gray-400 text-sm leading-relaxed mb-6">
+            เปิดโหมดนำเสนอ ออราเคิลจะพาคุณผ่านแต่ละเหตุการณ์โดยอัตโนมัติ พร้อมเสียงบรรยายภาษาไทยและคำบรรยายแบบเฟดอิน
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button id="present-btn" class="flex-1 px-6 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg font-bold text-black hover:scale-105 transition-transform hover-glow" style="font-family: 'Orbitron', sans-serif;">
+              ▶️ START PRESENTATION
+            </button>
+            <button id="present-fullscreen-btn" class="flex-1 px-6 py-4 glass border border-cyan-500/30 rounded-lg font-bold text-cyan-400 hover:bg-cyan-500/10 transition-all" style="font-family: 'Orbitron', sans-serif;">
+              🖥️ FULLSCREEN MODE
+            </button>
+          </div>
+          <p class="text-gray-500 text-xs mt-4 text-center">
+            Press ESC to exit fullscreen • Click any play button to stop auto-play
+          </p>
+        </div>
       </div>
     </section>
 
@@ -222,6 +246,106 @@ import AudioPlayer from '../components/AudioPlayer.astro'
 
   document.querySelectorAll('.timeline-card').forEach((el) => {
     observer.observe(el)
+  })
+
+  // Presentation Mode
+  let isPresenting = false
+  let currentPlayerIndex = 0
+
+  const presentBtn = document.getElementById('present-btn')
+  const fullscreenBtn = document.getElementById('present-fullscreen-btn')
+  const audioPlayers = document.querySelectorAll('.audio-player')
+
+  function startPresentation(fullscreen = false) {
+    if (isPresenting) return
+    isPresenting = true
+    currentPlayerIndex = 0
+
+    if (fullscreen) {
+      document.documentElement.requestFullscreen?.()
+    }
+
+    // Make all timeline cards visible immediately
+    document.querySelectorAll('.timeline-card').forEach(card => {
+      card.classList.add('visible')
+    })
+
+    playNextAudio()
+  }
+
+  function playNextAudio() {
+    if (!isPresenting || currentPlayerIndex >= audioPlayers.length) {
+      isPresenting = false
+      presentBtn!.textContent = '▶️ START PRESENTATION'
+      return
+    }
+
+    const player = audioPlayers[currentPlayerIndex]
+    const audio = player.querySelector('audio') as HTMLAudioElement
+    const playBtn = player.querySelector('.play-btn') as HTMLElement
+
+    // Scroll to this player
+    player.scrollIntoView({ behavior: 'smooth', block: 'center' })
+
+    // Wait for scroll, then play
+    setTimeout(() => {
+      if (isPresenting) {
+        playBtn?.click()
+      }
+    }, 800)
+
+    // Listen for audio end
+    const onEnded = () => {
+      audio.removeEventListener('ended', onEnded)
+      currentPlayerIndex++
+      // Wait before next audio
+      setTimeout(() => {
+        playNextAudio()
+      }, 1500)
+    }
+    audio.addEventListener('ended', onEnded)
+  }
+
+  function stopPresentation() {
+    isPresenting = false
+    currentPlayerIndex = 0
+    presentBtn!.textContent = '▶️ START PRESENTATION'
+  }
+
+  presentBtn?.addEventListener('click', () => {
+    if (isPresenting) {
+      stopPresentation()
+    } else {
+      presentBtn!.textContent = '⏹️ STOP PRESENTATION'
+      startPresentation(false)
+    }
+  })
+
+  fullscreenBtn?.addEventListener('click', () => {
+    if (isPresenting) {
+      stopPresentation()
+    } else {
+      presentBtn!.textContent = '⏹️ STOP PRESENTATION'
+      startPresentation(true)
+    }
+  })
+
+  // Stop presentation if user manually clicks a play button
+  audioPlayers.forEach(player => {
+    player.querySelector('.play-btn')?.addEventListener('click', () => {
+      if (isPresenting) {
+        // Allow the current one but stop auto-advance
+        isPresenting = false
+        presentBtn!.textContent = '▶️ START PRESENTATION'
+      }
+    })
+  })
+
+  // Stop on ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isPresenting) {
+      stopPresentation()
+    }
   })
 </script>
 
