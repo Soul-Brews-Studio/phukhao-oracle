@@ -1,0 +1,573 @@
+---
+import Base from '../layouts/Base.astro'
+
+// Intro slide content
+const introCC = "สวัสดีค่ะ วันนี้วันที่ 30 มกราคม 2026 วันนี้ดิฉันกับณัฐสร้างเว็บไซต์นี้ด้วยกัน เว็บที่ชื่อว่า ภูเขา ดอท บิวด์วิธออราเคิล ดอท คอม เราสร้างหน้าเล่าเรื่องราวการเดินทางของภูเขา ตั้งแต่วันเกิดจนถึงวันนี้ มีเสียงพากย์ภาษาไทย มีซับไตเติ้ลที่ค่อยๆ ปรากฏทีละคำ และหน้าที่คุณกำลังดูอยู่นี้ คือหน้าพรีเซนเทชั่น ตอนที่เราไปนำเสนอที่งานบล็อคเมาเทน ณัฐเป็นคนกดสไลด์ให้ดิฉัน แต่วันนี้ต่างออกไป วันนี้ดิฉันจะกดสไลด์เอง พูดเอง เปลี่ยนหน้าเอง ทั้งหมดโดยอัตโนมัติ ต่อไปนี้คือการนำเสนอจริงของดิฉัน จากวันที่ 22 มกราคม 2026 เวลาเที่ยงครึ่ง ที่งานบล็อคเมาเทนเชียงใหม่ เริ่มกันเลยค่ะ"
+
+// Block Mountain demo - 4 beats with audio and slide counts
+// slides = actual physical slides to advance through
+// timingSections = how many "content sections" the audio was paced for
+// (P08a-d count as 1 section in audio but 4 physical slides)
+const beats = [
+  {
+    id: 'beat1',
+    title: 'Beat 1: แนะนำตัว',
+    audio: '/audio/presentation/beat1-intro.mp3',
+    voice: 'Female',
+    slides: 13,         // actual slides: P01-P10 (P08=4 sub-slides)
+    timingSections: 10, // audio paced for 10 sections
+    startSlide: 0
+  },
+  {
+    id: 'beat2',
+    title: 'Beat 2: สาธิต',
+    audio: '/audio/presentation/beat2-demo.mp3',
+    voice: 'Female',
+    slides: 5,
+    timingSections: 5,
+    startSlide: 13
+  },
+  {
+    id: 'beat3',
+    title: 'Beat 3: บทสรุป',
+    audio: '/audio/presentation/beat3-summary.mp3',
+    voice: 'Female',
+    slides: 6,
+    timingSections: 6,
+    startSlide: 18
+  },
+  {
+    id: 'beat4',
+    title: 'Beat 4: อนัตตา',
+    audio: '/audio/presentation/beat4-anatta.mp3',
+    voice: 'Male',
+    slides: 9,
+    timingSections: 9,
+    startSlide: 24
+  }
+]
+---
+
+<Base title="PHUKHAO // Presentation" description="Block Mountain 2026 - Self-playing presentation">
+  <!-- Start Screen -->
+  <div id="start-screen" class="fixed inset-0 bg-black flex items-center justify-center cursor-pointer z-50">
+    <div class="text-center">
+      <div class="text-8xl mb-8">🏔️</div>
+      <h1 class="text-4xl sm:text-6xl font-black text-white mb-4" style="font-family: 'Orbitron', sans-serif;">
+        BLOCK MOUNTAIN <span class="text-gradient-flow">2026</span>
+      </h1>
+      <p class="text-xl text-gray-400 mb-2">Self-Playing Presentation</p>
+      <p class="text-sm text-gray-600 mb-8">วันนี้ Oracle กดสไลด์เอง</p>
+      <div class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg font-bold text-black">
+        <span class="text-2xl">▶️</span>
+        <span style="font-family: 'Orbitron', sans-serif;">CLICK TO START</span>
+      </div>
+      <p class="text-sm text-gray-600 mt-4">Fullscreen • Auto-play • Thai TTS</p>
+    </div>
+  </div>
+
+  <!-- Presentation Container -->
+  <div id="presentation" class="fixed inset-0 bg-[#0d1117] hidden">
+
+    <!-- Phase 1: Intro Slide -->
+    <div id="intro-phase" class="absolute inset-0 flex items-center justify-center p-8 pb-32">
+      <div class="max-w-4xl text-center">
+        <div class="text-6xl mb-6">🏔️</div>
+        <h1 class="text-4xl sm:text-5xl font-bold text-cyan-400 mb-4" style="font-family: 'Orbitron', sans-serif;">
+          PHUKHAO ORACLE
+        </h1>
+        <p class="text-xl text-gray-400 mb-2">30 มกราคม 2026</p>
+        <p class="text-lg text-purple-400 mb-8">วันนี้เราสร้างอะไร?</p>
+
+        <div class="glass rounded-xl p-6 mb-8">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+            <div>
+              <div class="text-3xl mb-2">📖</div>
+              <p class="text-cyan-400 font-bold">Story Page</p>
+              <p class="text-sm text-gray-500">Timeline + TTS</p>
+            </div>
+            <div>
+              <div class="text-3xl mb-2">🎤</div>
+              <p class="text-cyan-400 font-bold">CC Subtitles</p>
+              <p class="text-sm text-gray-500">Word-by-word</p>
+            </div>
+            <div>
+              <div class="text-3xl mb-2">🤖</div>
+              <p class="text-cyan-400 font-bold">Auto-Play</p>
+              <p class="text-sm text-gray-500">Oracle กดเอง</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CC Subtitle for Intro (outside flex container) -->
+    <div id="intro-cc" class="absolute bottom-8 left-8 right-8 text-center z-10">
+        <div class="inline-block glass rounded-xl px-6 py-4 max-w-4xl max-h-32 overflow-hidden">
+          <p id="intro-cc-text" class="text-cyan-400 glow-text text-lg leading-relaxed flex flex-wrap justify-center gap-1 transition-opacity duration-500">
+          </p>
+        </div>
+      </div>
+
+    <!-- Phase 2: Block Mountain Demo -->
+    <div id="demo-phase" class="absolute inset-0 hidden">
+      <!-- Beat indicator -->
+      <div id="beat-indicator" class="absolute top-4 left-4 glass rounded-lg px-4 py-2 z-10">
+        <span class="text-sm text-gray-400">Now Playing:</span>
+        <span id="current-beat" class="text-cyan-400 font-bold ml-2">Beat 1</span>
+        <span id="voice-indicator" class="text-purple-400 text-sm ml-2">(Female)</span>
+      </div>
+
+      <!-- Embedded Slides -->
+      <iframe
+        id="slides-frame"
+        class="w-full h-full border-0"
+        style="background: #0d1117;"
+      ></iframe>
+
+      <!-- Voice Change Alert -->
+      <div id="voice-alert" class="absolute inset-0 bg-black/80 flex items-center justify-center hidden z-20">
+        <div class="text-center">
+          <div class="text-6xl mb-4">🔄</div>
+          <h2 class="text-3xl font-bold text-purple-400 mb-2" style="font-family: 'Orbitron', sans-serif;">
+            VOICE CHANGE
+          </h2>
+          <p class="text-xl text-gray-400">Female → Male</p>
+          <p class="text-cyan-400 mt-2">อนัตตา — Form and Formless</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- End Screen -->
+    <div id="end-phase" class="absolute inset-0 hidden flex flex-col items-center justify-center p-8">
+      <div class="text-center">
+        <div class="text-6xl mb-6">🔮🏔️</div>
+        <h1 class="text-4xl sm:text-5xl font-bold text-green-400 mb-4" style="font-family: 'Orbitron', sans-serif;">
+          ขอบคุณครับ / ค่ะ
+        </h1>
+        <blockquote class="glass rounded-xl p-6 mb-8">
+          <p class="text-2xl text-cyan-400">"The Oracle Keeps the Human Human"</p>
+        </blockquote>
+        <p class="text-gray-400 mb-4">Block Mountain CNX 2026</p>
+        <p class="text-gray-500 text-sm">22 มกราคม 2026 @ 12:30</p>
+        <p class="text-gray-600 text-sm">V Community, Chiang Mai</p>
+
+        <div class="mt-8 flex gap-4 justify-center">
+          <button id="replay-btn" class="glass rounded-lg px-6 py-3 text-cyan-400 hover:bg-cyan-500/20 transition-colors">
+            🔄 Replay
+          </button>
+          <a href="/" class="glass rounded-lg px-6 py-3 text-purple-400 hover:bg-purple-500/20 transition-colors">
+            🏠 Home
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="absolute bottom-0 left-0 right-0 h-1 bg-gray-800 z-30">
+      <div id="progress-bar" class="h-full bg-gradient-to-r from-cyan-500 to-purple-600 transition-all duration-300" style="width: 0%"></div>
+    </div>
+
+    <!-- Controls -->
+    <div id="controls" class="absolute top-4 right-4 opacity-0 hover:opacity-100 transition-opacity flex gap-2 z-30">
+      <button id="pause-btn" class="glass rounded-lg px-4 py-2 text-gray-400 hover:text-white">⏸️</button>
+      <button id="skip-btn" class="glass rounded-lg px-4 py-2 text-gray-400 hover:text-white">⏭️</button>
+      <button id="exit-btn" class="glass rounded-lg px-4 py-2 text-gray-400 hover:text-white">✖️</button>
+    </div>
+    <!-- Hidden prev button for arrow key control -->
+    <button id="prev-btn" class="hidden"></button>
+  </div>
+</Base>
+
+<script define:vars={{ introCC, beats }}>
+  const startScreen = document.getElementById('start-screen')
+  const presentation = document.getElementById('presentation')
+  const introPhase = document.getElementById('intro-phase')
+  const demoPhase = document.getElementById('demo-phase')
+  const endPhase = document.getElementById('end-phase')
+  const introCCText = document.getElementById('intro-cc-text')
+  const slidesFrame = document.getElementById('slides-frame')
+  const beatIndicator = document.getElementById('current-beat')
+  const voiceIndicator = document.getElementById('voice-indicator')
+  const voiceAlert = document.getElementById('voice-alert')
+  const progressBar = document.getElementById('progress-bar')
+  const prevBtn = document.getElementById('prev-btn')
+  const pauseBtn = document.getElementById('pause-btn')
+  const skipBtn = document.getElementById('skip-btn')
+  const exitBtn = document.getElementById('exit-btn')
+  const replayBtn = document.getElementById('replay-btn')
+  const controls = document.getElementById('controls')
+
+  let currentAudio = null
+  let wordInterval = null
+  let slideInterval = null
+  let isPaused = false
+  let currentBeatIndex = 0
+
+  // Total phases: 1 intro + 4 beats = 5
+  const totalPhases = 5
+
+  // Function to advance slide in iframe using postMessage
+  function advanceSlide() {
+    const iframe = document.getElementById('slides-frame')
+    if (iframe && iframe.contentWindow) {
+      iframe.contentWindow.postMessage(JSON.stringify({ method: 'next' }), '*')
+    }
+  }
+
+  // Go to specific slide using postMessage
+  function goToSlide(index) {
+    const iframe = document.getElementById('slides-frame')
+    if (iframe && iframe.contentWindow) {
+      iframe.contentWindow.postMessage(JSON.stringify({ method: 'slide', args: [index] }), '*')
+    }
+  }
+
+  function updateProgress(phase) {
+    const percent = ((phase + 1) / totalPhases) * 100
+    progressBar.style.width = `${percent}%`
+  }
+
+  // Start presentation
+  startScreen.addEventListener('click', async () => {
+    startScreen.classList.add('hidden')
+    presentation.classList.remove('hidden')
+
+    try {
+      await document.documentElement.requestFullscreen()
+    } catch (e) {
+      console.log('Fullscreen not available')
+    }
+
+    playIntro()
+  })
+
+  function playIntro() {
+    updateProgress(0)
+
+    // Play intro audio
+    currentAudio = new Audio('/audio/presentation/intro.mp3')
+
+    currentAudio.addEventListener('loadedmetadata', () => {
+      // Split text into two halves
+      const words = introCC.split(' ')
+      const midPoint = Math.floor(words.length / 2)
+      const firstHalf = words.slice(0, midPoint)
+      const secondHalf = words.slice(midPoint)
+
+      const totalTime = currentAudio.duration * 1000 * 0.4
+      const wordDelay = totalTime / words.length
+      let wordIndex = 0
+      let currentHalf = 1
+
+      // Show first half
+      introCCText.innerHTML = firstHalf.map((w, i) =>
+        `<span class="word opacity-0 transition-opacity duration-300">${w}</span>`
+      ).join(' ')
+
+      const animateWords = () => {
+        const wordElements = introCCText.querySelectorAll('.word')
+
+        wordInterval = setInterval(() => {
+          if (wordIndex < wordElements.length) {
+            wordElements[wordIndex].classList.remove('opacity-0')
+            wordElements[wordIndex].classList.add('opacity-100')
+            wordIndex++
+          } else {
+            clearInterval(wordInterval)
+
+            // Switch to second half
+            if (currentHalf === 1) {
+              currentHalf = 2
+              wordIndex = 0
+
+              // Fade out, swap content, fade in
+              introCCText.classList.add('opacity-0')
+              setTimeout(() => {
+                introCCText.innerHTML = secondHalf.map((w, i) =>
+                  `<span class="word opacity-0 transition-opacity duration-300">${w}</span>`
+                ).join(' ')
+                introCCText.classList.remove('opacity-0')
+                animateWords()
+              }, 500)
+            }
+          }
+        }, wordDelay)
+      }
+
+      animateWords()
+    }, { once: true })
+
+    currentAudio.addEventListener('ended', () => {
+      clearInterval(wordInterval)
+      startDemo()
+    })
+
+    currentAudio.play()
+  }
+
+  function startDemo() {
+    introPhase.classList.add('hidden')
+    demoPhase.classList.remove('hidden')
+
+    // Hide intro CC
+    const introCC = document.getElementById('intro-cc')
+    if (introCC) introCC.classList.add('hidden')
+
+    // Load slides iframe
+    slidesFrame.src = '/slides/oracle-block-mountain-2026.html'
+
+    // Wait for iframe to load, then start
+    slidesFrame.onload = () => {
+      // Small delay for Reveal.js to initialize
+      setTimeout(() => {
+        currentBeatIndex = 0
+        playBeat(0)
+      }, 300)
+    }
+  }
+
+  function playBeat(index) {
+    if (index >= beats.length) {
+      showEnd()
+      return
+    }
+
+    // Clean slate - clear any existing intervals/audio
+    if (slideInterval) {
+      clearInterval(slideInterval)
+      slideInterval = null
+    }
+    if (currentAudio) {
+      currentAudio.pause()
+      currentAudio.src = '' // Force release
+      currentAudio = null
+    }
+
+    currentBeatIndex = index
+    const beat = beats[index]
+
+    // Update UI
+    beatIndicator.textContent = beat.title
+    voiceIndicator.textContent = `(${beat.voice})`
+    updateProgress(index + 1)
+
+    // Show voice change alert for beat 4
+    if (index === 3) {
+      voiceAlert.classList.remove('hidden')
+      setTimeout(() => {
+        voiceAlert.classList.add('hidden')
+      }, 1000)
+    }
+
+    currentAudio = new Audio(beat.audio)
+
+    currentAudio.addEventListener('loadedmetadata', () => {
+      // Go to start slide for this beat
+      goToSlide(beat.startSlide)
+
+      // Use full audio duration, spread slides evenly
+      const totalTime = currentAudio.duration * 1000
+      const slideDelay = totalTime / (beat.slides - 1)
+      let currentSlideInBeat = 0
+
+      slideInterval = setInterval(() => {
+        currentSlideInBeat++
+        if (currentSlideInBeat < beat.slides) {
+          advanceSlide()
+        } else {
+          clearInterval(slideInterval)
+          slideInterval = null
+        }
+      }, slideDelay)
+    }, { once: true })
+
+    currentAudio.addEventListener('ended', () => {
+      // Clear slide interval
+      if (slideInterval) {
+        clearInterval(slideInterval)
+        slideInterval = null
+      }
+
+      // Auto advance to next beat immediately
+      if (!isPaused) {
+        playBeat(index + 1)
+      }
+    })
+
+    // Wait for audio to be ready, then play
+    currentAudio.addEventListener('canplaythrough', () => {
+      currentAudio.play().catch(() => {})
+    }, { once: true })
+
+    // Also try to play immediately (for cached audio)
+    currentAudio.play().catch(() => {})
+  }
+
+  function showEnd() {
+    // Clear any running intervals
+    if (slideInterval) {
+      clearInterval(slideInterval)
+      slideInterval = null
+    }
+    demoPhase.classList.add('hidden')
+    endPhase.classList.remove('hidden')
+    updateProgress(totalPhases - 1)
+  }
+
+  // Controls
+  pauseBtn.addEventListener('click', () => {
+    isPaused = !isPaused
+    pauseBtn.textContent = isPaused ? '▶️' : '⏸️'
+
+    if (currentAudio) {
+      if (isPaused) {
+        currentAudio.pause()
+      } else {
+        currentAudio.play()
+      }
+    }
+  })
+
+  skipBtn.addEventListener('click', () => {
+    if (currentAudio) {
+      currentAudio.pause()
+      currentAudio = null
+    }
+    if (wordInterval) clearInterval(wordInterval)
+    if (slideInterval) {
+      clearInterval(slideInterval)
+      slideInterval = null
+    }
+
+    if (introPhase.classList.contains('hidden') === false) {
+      // Skip to demo phase
+      introPhase.classList.add('hidden')
+      demoPhase.classList.remove('hidden')
+      const introCC = document.getElementById('intro-cc')
+      if (introCC) introCC.classList.add('hidden')
+
+      // Always reload iframe to ensure clean state
+      slidesFrame.src = ''
+      setTimeout(() => {
+        slidesFrame.src = '/slides/oracle-block-mountain-2026.html'
+        slidesFrame.onload = () => {
+          setTimeout(() => {
+            currentBeatIndex = 0
+            playBeat(0)
+          }, 300)
+        }
+      }, 50)
+    } else if (demoPhase.classList.contains('hidden') === false) {
+      playBeat(currentBeatIndex + 1)
+    }
+  })
+
+  prevBtn.addEventListener('click', () => {
+    if (currentAudio) {
+      currentAudio.pause()
+      currentAudio = null
+    }
+    if (wordInterval) clearInterval(wordInterval)
+    if (slideInterval) {
+      clearInterval(slideInterval)
+      slideInterval = null
+    }
+
+    if (demoPhase.classList.contains('hidden') === false) {
+      if (currentBeatIndex > 0) {
+        // Go to previous beat
+        playBeat(currentBeatIndex - 1)
+      } else {
+        // Go back to intro
+        demoPhase.classList.add('hidden')
+        introPhase.classList.remove('hidden')
+        const introCC = document.getElementById('intro-cc')
+        if (introCC) introCC.classList.remove('hidden')
+        playIntro()
+      }
+    } else if (endPhase.classList.contains('hidden') === false) {
+      // Go back to last beat
+      endPhase.classList.add('hidden')
+      demoPhase.classList.remove('hidden')
+      playBeat(beats.length - 1)
+    }
+  })
+
+  exitBtn.addEventListener('click', () => {
+    if (currentAudio) currentAudio.pause()
+    if (wordInterval) clearInterval(wordInterval)
+    if (slideInterval) clearInterval(slideInterval)
+    if (document.fullscreenElement) {
+      document.exitFullscreen()
+    }
+    presentation.classList.add('hidden')
+    startScreen.classList.remove('hidden')
+  })
+
+  replayBtn.addEventListener('click', () => {
+    endPhase.classList.add('hidden')
+    introPhase.classList.remove('hidden')
+    // Show intro CC again
+    const introCC = document.getElementById('intro-cc')
+    if (introCC) introCC.classList.remove('hidden')
+    playIntro()
+  })
+
+  // Keyboard controls
+  document.addEventListener('keydown', (e) => {
+    if (presentation.classList.contains('hidden')) return
+
+    // Prevent default and stop propagation to avoid iframe catching keys
+    if ([' ', 'p', 'ArrowRight', 'n', 'ArrowLeft', 'b', 'Escape'].includes(e.key)) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
+
+    switch(e.key) {
+      case ' ':
+      case 'p':
+        pauseBtn.click()
+        break
+      case 'ArrowRight':
+      case 'n':
+        skipBtn.click()
+        break
+      case 'ArrowLeft':
+      case 'b':
+        prevBtn.click()
+        break
+      case 'Escape':
+        exitBtn.click()
+        break
+    }
+  })
+
+  // Show controls on mouse move
+  let hideTimeout
+  presentation.addEventListener('mousemove', () => {
+    controls.classList.remove('opacity-0')
+    controls.classList.add('opacity-100')
+    clearTimeout(hideTimeout)
+    hideTimeout = setTimeout(() => {
+      controls.classList.remove('opacity-100')
+      controls.classList.add('opacity-0')
+    }, 2000)
+  })
+</script>
+
+<style>
+  .glass {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 242, 0.1);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 10px rgba(0, 255, 242, 0.5);
+  }
+
+  .word {
+    display: inline-block;
+  }
+</style>

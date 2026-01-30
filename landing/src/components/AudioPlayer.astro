@@ -1,0 +1,144 @@
+---
+interface Props {
+  src: string
+  title: string
+  subtitle?: string  // Thai text to display as CC
+}
+const { src, title, subtitle } = Astro.props
+const words = subtitle ? subtitle.split(' ') : []
+---
+
+<div class="audio-player glass rounded-xl p-4 hover-glow transition-all">
+  <div class="flex items-center gap-4">
+    <button class="play-btn w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center text-black hover:scale-105 transition-transform" aria-label="Play audio">
+      <span class="play-icon text-xl">▶️</span>
+      <span class="pause-icon hidden text-xl">⏸️</span>
+    </button>
+
+    <div class="flex-1">
+      <div class="text-sm font-mono text-cyan-400 mb-2">{title}</div>
+      <div class="h-2 bg-cyan-900/30 rounded-full overflow-hidden">
+        <div class="progress-bar h-full bg-gradient-to-r from-cyan-500 to-purple-600 w-0 transition-all"></div>
+      </div>
+      <div class="flex justify-between text-xs text-gray-500 mt-1 font-mono">
+        <span class="current-time">0:00</span>
+        <span class="total-time">--:--</span>
+      </div>
+    </div>
+  </div>
+
+  {words.length > 0 && (
+    <div class="subtitle-container mt-4 hidden">
+      <div class="subtitle-text text-cyan-400 glow-text text-sm leading-relaxed flex flex-wrap gap-1">
+        {words.map((word, i) => (
+          <span class="word opacity-0 transition-opacity duration-300" data-index={i}>{word}</span>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <audio class="hidden" preload="metadata">
+    <source src={src} type="audio/mpeg" />
+  </audio>
+</div>
+
+<script>
+  document.querySelectorAll('.audio-player').forEach(player => {
+    const audio = player.querySelector('audio') as HTMLAudioElement
+    const playBtn = player.querySelector('.play-btn')
+    const playIcon = player.querySelector('.play-icon')
+    const pauseIcon = player.querySelector('.pause-icon')
+    const progressBar = player.querySelector('.progress-bar') as HTMLElement
+    const currentTime = player.querySelector('.current-time')
+    const totalTime = player.querySelector('.total-time')
+    const subtitleContainer = player.querySelector('.subtitle-container') as HTMLElement
+    const words = player.querySelectorAll('.word')
+
+    let wordInterval: number | null = null
+    let currentWordIndex = 0
+
+    function showWordsSequentially(duration: number) {
+      if (!subtitleContainer || words.length === 0) return
+
+      subtitleContainer.classList.remove('hidden')
+      currentWordIndex = 0
+
+      // Reset all words
+      words.forEach(w => {
+        w.classList.remove('opacity-100')
+        w.classList.add('opacity-0')
+      })
+
+      const wordDelay = (duration * 1000 * 0.6) / words.length
+
+      wordInterval = window.setInterval(() => {
+        if (currentWordIndex < words.length) {
+          words[currentWordIndex].classList.remove('opacity-0')
+          words[currentWordIndex].classList.add('opacity-100')
+          currentWordIndex++
+        } else {
+          if (wordInterval) clearInterval(wordInterval)
+        }
+      }, wordDelay)
+    }
+
+    function stopWords() {
+      if (wordInterval) {
+        clearInterval(wordInterval)
+        wordInterval = null
+      }
+    }
+
+    function hideSubtitle() {
+      if (subtitleContainer) {
+        words.forEach(w => {
+          w.classList.remove('opacity-100')
+          w.classList.add('opacity-0')
+        })
+        setTimeout(() => {
+          subtitleContainer.classList.add('hidden')
+        }, 300)
+      }
+    }
+
+    playBtn?.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play()
+        playIcon?.classList.add('hidden')
+        pauseIcon?.classList.remove('hidden')
+        if (audio.duration) {
+          showWordsSequentially(audio.duration)
+        }
+      } else {
+        audio.pause()
+        playIcon?.classList.remove('hidden')
+        pauseIcon?.classList.add('hidden')
+        stopWords()
+      }
+    })
+
+    audio.addEventListener('timeupdate', () => {
+      const percent = (audio.currentTime / audio.duration) * 100
+      progressBar.style.width = `${percent}%`
+      if (currentTime) currentTime.textContent = formatTime(audio.currentTime)
+    })
+
+    audio.addEventListener('loadedmetadata', () => {
+      if (totalTime) totalTime.textContent = formatTime(audio.duration)
+    })
+
+    audio.addEventListener('ended', () => {
+      playIcon?.classList.remove('hidden')
+      pauseIcon?.classList.add('hidden')
+      progressBar.style.width = '0%'
+      stopWords()
+      // Keep subtitle visible after audio ends
+    })
+
+    function formatTime(seconds: number) {
+      const mins = Math.floor(seconds / 60)
+      const secs = Math.floor(seconds % 60)
+      return `${mins}:${secs.toString().padStart(2, '0')}`
+    }
+  })
+</script>
