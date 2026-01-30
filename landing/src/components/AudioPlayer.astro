@@ -69,7 +69,7 @@ const words = subtitle ? subtitle.split(' ') : []
         w.classList.add('opacity-0')
       })
 
-      const wordDelay = (duration * 1000 * 0.25) / words.length
+      const wordDelay = (duration * 1000 * 0.6) / words.length
 
       wordInterval = window.setInterval(() => {
         if (currentWordIndex < words.length) {
