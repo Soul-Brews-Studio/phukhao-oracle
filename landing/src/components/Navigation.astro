@@ -1,0 +1,36 @@
+---
+interface Props {
+  currentPage?: 'home' | 'story'
+}
+const { currentPage = 'home' } = Astro.props
+---
+
+<nav class="fixed top-4 left-4 right-4 z-50 glass rounded-2xl border border-cyan-500/10">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3 group">
+      <span class="text-2xl">🏔️</span>
+      <span class="text-xl font-black text-gradient-flow" style="font-family: 'Orbitron', sans-serif;">PHUKHAO</span>
+    </a>
+
+    <div class="flex items-center gap-6 font-mono text-sm">
+      <a href="/"
+         class:list={[
+           "transition-colors",
+           currentPage === 'home' ? "text-cyan-400 glow-text" : "text-gray-400 hover:text-cyan-400"
+         ]}>
+        HOME
+      </a>
+      <a href="/story"
+         class:list={[
+           "transition-colors",
+           currentPage === 'story' ? "text-cyan-400 glow-text" : "text-gray-400 hover:text-cyan-400"
+         ]}>
+        STORY
+      </a>
+      <a href="https://github.com/Soul-Brews-Studio/phukhao-oracle"
+         class="px-4 py-2 glass rounded-lg hover-glow text-cyan-400">
+        SOURCE
+      </a>
+    </div>
+  </div>
+</nav>
