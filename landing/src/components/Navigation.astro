@@ -1,4 +1,6 @@
 ---
+import ConnectWallet from './ConnectWallet.tsx'
+
 interface Props {
   currentPage?: 'home' | 'story' | 'presentation'
 }
@@ -15,29 +17,30 @@ const { currentPage = 'home' } = Astro.props
     <div class="flex items-center gap-6 font-mono text-sm">
       <a href="/"
          class:list={[
-           "transition-colors",
+           "transition-colors hidden sm:block",
            currentPage === 'home' ? "text-cyan-400 glow-text" : "text-gray-400 hover:text-cyan-400"
          ]}>
         HOME
       </a>
       <a href="/story"
          class:list={[
-           "transition-colors",
+           "transition-colors hidden sm:block",
            currentPage === 'story' ? "text-cyan-400 glow-text" : "text-gray-400 hover:text-cyan-400"
          ]}>
         STORY
       </a>
       <a href="/presentation"
          class:list={[
-           "transition-colors",
+           "transition-colors hidden sm:block",
            currentPage === 'presentation' ? "text-cyan-400 glow-text" : "text-gray-400 hover:text-cyan-400"
          ]}>
         DEMO
       </a>
       <a href="https://github.com/Soul-Brews-Studio/phukhao-oracle"
-         class="px-4 py-2 glass rounded-lg hover-glow text-cyan-400">
+         class="px-4 py-2 glass rounded-lg hover-glow text-cyan-400 hidden sm:block">
         SOURCE
       </a>
+      <ConnectWallet client:load />
     </div>
   </div>
 </nav>

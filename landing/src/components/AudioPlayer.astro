@@ -18,7 +18,7 @@ const words = subtitle ? subtitle.split(' ') : []
     <div class="flex-1">
       <div class="text-sm font-mono text-cyan-400 mb-2">{title}</div>
       <div class="h-2 bg-cyan-900/30 rounded-full overflow-hidden">
-        <div class="progress-bar h-full bg-gradient-to-r from-cyan-500 to-purple-600 w-0 transition-all"></div>
+        <div class="progress-bar h-full bg-gradient-to-r from-cyan-500 to-purple-600 w-0" style="transition: width 0.1s linear;"></div>
       </div>
       <div class="flex justify-between text-xs text-gray-500 mt-1 font-mono">
         <span class="current-time">0:00</span>
