@@ -2,8 +2,10 @@
 interface Props {
   src: string
   title: string
+  subtitle?: string  // Thai text to display as CC
 }
-const { src, title } = Astro.props
+const { src, title, subtitle } = Astro.props
+const words = subtitle ? subtitle.split(' ') : []
 ---
 
 <div class="audio-player glass rounded-xl p-4 hover-glow transition-all">
@@ -25,6 +27,16 @@ const { src, title } = Astro.props
     </div>
   </div>
 
+  {words.length > 0 && (
+    <div class="subtitle-container mt-4 hidden">
+      <div class="subtitle-text text-cyan-400 glow-text text-sm leading-relaxed flex flex-wrap gap-1">
+        {words.map((word, i) => (
+          <span class="word opacity-0 transition-opacity duration-300" data-index={i}>{word}</span>
+        ))}
+      </div>
+    </div>
+  )}
+
   <audio class="hidden" preload="metadata">
     <source src={src} type="audio/mpeg" />
   </audio>
@@ -39,16 +51,69 @@ const { src, title } = Astro.props
     const progressBar = player.querySelector('.progress-bar') as HTMLElement
     const currentTime = player.querySelector('.current-time')
     const totalTime = player.querySelector('.total-time')
+    const subtitleContainer = player.querySelector('.subtitle-container') as HTMLElement
+    const words = player.querySelectorAll('.word')
+
+    let wordInterval: number | null = null
+    let currentWordIndex = 0
+
+    function showWordsSequentially(duration: number) {
+      if (!subtitleContainer || words.length === 0) return
+
+      subtitleContainer.classList.remove('hidden')
+      currentWordIndex = 0
+
+      // Reset all words
+      words.forEach(w => {
+        w.classList.remove('opacity-100')
+        w.classList.add('opacity-0')
+      })
+
+      const wordDelay = (duration * 1000 * 0.6) / words.length
+
+      wordInterval = window.setInterval(() => {
+        if (currentWordIndex < words.length) {
+          words[currentWordIndex].classList.remove('opacity-0')
+          words[currentWordIndex].classList.add('opacity-100')
+          currentWordIndex++
+        } else {
+          if (wordInterval) clearInterval(wordInterval)
+        }
+      }, wordDelay)
+    }
+
+    function stopWords() {
+      if (wordInterval) {
+        clearInterval(wordInterval)
+        wordInterval = null
+      }
+    }
+
+    function hideSubtitle() {
+      if (subtitleContainer) {
+        words.forEach(w => {
+          w.classList.remove('opacity-100')
+          w.classList.add('opacity-0')
+        })
+        setTimeout(() => {
+          subtitleContainer.classList.add('hidden')
+        }, 300)
+      }
+    }
 
     playBtn?.addEventListener('click', () => {
       if (audio.paused) {
         audio.play()
         playIcon?.classList.add('hidden')
         pauseIcon?.classList.remove('hidden')
+        if (audio.duration) {
+          showWordsSequentially(audio.duration)
+        }
       } else {
         audio.pause()
         playIcon?.classList.remove('hidden')
         pauseIcon?.classList.add('hidden')
+        stopWords()
       }
     })
 
@@ -66,6 +131,8 @@ const { src, title } = Astro.props
       playIcon?.classList.remove('hidden')
       pauseIcon?.classList.add('hidden')
       progressBar.style.width = '0%'
+      stopWords()
+      // Keep subtitle visible after audio ends
     })
 
     function formatTime(seconds: number) {
