@@ -2,7 +2,7 @@
 import ConnectWallet from './ConnectWallet.tsx'
 
 interface Props {
-  currentPage?: 'home' | 'story' | 'presentation'
+  currentPage?: 'home' | 'story' | 'presentation' | 'thanks'
 }
 const { currentPage = 'home' } = Astro.props
 ---
@@ -35,6 +35,13 @@ const { currentPage = 'home' } = Astro.props
            currentPage === 'presentation' ? "text-cyan-400 glow-text" : "text-gray-400 hover:text-cyan-400"
          ]}>
         DEMO
+      </a>
+      <a href="/thanks"
+         class:list={[
+           "transition-colors hidden sm:block",
+           currentPage === 'thanks' ? "text-purple-400 glow-text" : "text-gray-400 hover:text-purple-400"
+         ]}>
+        🙏
       </a>
       <a href="https://github.com/Soul-Brews-Studio/phukhao-oracle"
          class="px-4 py-2 glass rounded-lg hover-glow text-cyan-400 hidden sm:block">
