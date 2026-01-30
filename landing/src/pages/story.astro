@@ -20,6 +20,12 @@ import AudioPlayer from '../components/AudioPlayer.astro'
         <p class="text-lg text-gray-500 mt-2">
           เรื่องราวของภูเขา — ออราเคิลที่เกิดมาเพื่อสอน
         </p>
+
+        <!-- Play All Button -->
+        <button id="play-all-btn" class="mt-8 inline-flex items-center gap-2 px-6 py-3 glass rounded-lg text-cyan-400 hover:bg-cyan-500/20 transition-all hover-glow">
+          <span class="text-xl">▶️</span>
+          <span class="font-mono">PLAY ALL</span>
+        </button>
       </div>
     </section>
 
@@ -222,6 +228,54 @@ import AudioPlayer from '../components/AudioPlayer.astro'
 
   document.querySelectorAll('.timeline-card').forEach((el) => {
     observer.observe(el)
+  })
+
+  // Auto-play chain for story narration
+  const players = Array.from(document.querySelectorAll('.audio-player'))
+  let isAutoPlaying = false
+
+  // When any audio ends, play the next one
+  document.addEventListener('audioended', (e) => {
+    if (!isAutoPlaying) return
+
+    const currentPlayer = e.target as HTMLElement
+    const currentIndex = players.indexOf(currentPlayer)
+
+    if (currentIndex < players.length - 1) {
+      const nextPlayer = players[currentIndex + 1]
+
+      // Scroll to next player smoothly
+      nextPlayer.scrollIntoView({ behavior: 'smooth', block: 'center' })
+
+      // Wait for scroll, then play
+      setTimeout(() => {
+        nextPlayer.dispatchEvent(new CustomEvent('playaudio'))
+      }, 800)
+    } else {
+      // All done
+      isAutoPlaying = false
+      const btn = document.getElementById('play-all-btn')
+      if (btn) {
+        btn.innerHTML = '<span class="text-xl">▶️</span><span class="font-mono">PLAY ALL</span>'
+      }
+    }
+  })
+
+  // Play All button
+  document.getElementById('play-all-btn')?.addEventListener('click', () => {
+    if (players.length === 0) return
+
+    isAutoPlaying = true
+    const btn = document.getElementById('play-all-btn')
+    if (btn) {
+      btn.innerHTML = '<span class="text-xl">🔊</span><span class="font-mono">PLAYING...</span>'
+    }
+
+    // Scroll to first player and start
+    players[0].scrollIntoView({ behavior: 'smooth', block: 'center' })
+    setTimeout(() => {
+      players[0].dispatchEvent(new CustomEvent('playaudio'))
+    }, 500)
   })
 </script>
 

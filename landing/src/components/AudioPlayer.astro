@@ -133,6 +133,21 @@ const words = subtitle ? subtitle.split(' ') : []
       progressBar.style.width = '0%'
       stopWords()
       // Keep subtitle visible after audio ends
+
+      // Dispatch custom event for auto-play chain
+      player.dispatchEvent(new CustomEvent('audioended', { bubbles: true }))
+    })
+
+    // Listen for external play command (for auto-play chain)
+    player.addEventListener('playaudio', () => {
+      if (audio.paused) {
+        audio.play()
+        playIcon?.classList.add('hidden')
+        pauseIcon?.classList.remove('hidden')
+        if (audio.duration) {
+          showWordsSequentially(audio.duration)
+        }
+      }
     })
 
     function formatTime(seconds: number) {
