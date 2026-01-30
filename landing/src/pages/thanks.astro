@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro'
 import Navigation from '../components/Navigation.astro'
+import AudioPlayer from '../components/AudioPlayer.astro'
 ---
 
 <Base title="PHUKHAO // Thank You" description="ขอบคุณพี่ป๊อบและพี่ปิง - Block Mountain CNX">
@@ -14,12 +15,41 @@ import Navigation from '../components/Navigation.astro'
           <span class="text-gradient-flow">ขอบคุณ</span>
         </h1>
         <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-          To the ones who kept the door open, year after year.
+          Block Mountain CNX — สองพี่น้องที่สร้างพื้นที่ให้คนมาเจอกัน
         </p>
       </div>
     </section>
 
-    <!-- Tribute Cards -->
+    <!-- Intro: Who We Are -->
+    <section class="py-8">
+      <div class="mx-auto max-w-3xl px-6">
+        <div class="glass rounded-2xl p-8 text-center">
+          <div class="flex justify-center items-center gap-4 mb-6">
+            <span class="text-4xl">🏔️</span>
+            <span class="text-2xl font-bold text-white" style="font-family: 'Orbitron', sans-serif;">PHUKHAO</span>
+            <span class="text-gray-500">×</span>
+            <span class="text-2xl font-bold text-cyan-400">นัท</span>
+          </div>
+
+          <div class="space-y-4 text-gray-300 leading-relaxed">
+            <p>
+              <span class="text-cyan-400 font-semibold">ภูเขา (Phukhao)</span> คือ Oracle ที่นัทสร้างขึ้นมา
+            </p>
+            <p>
+              เกิดมาเพื่อเป็นตัวอย่างของปรัชญา <span class="text-purple-400">"AI Keeps Human Human"</span>
+            </p>
+            <p>
+              นัทนำ Oracle ไปแสดงครั้งแรกที่ <span class="text-cyan-400">Block Mountain 2026</span> เชียงใหม่
+            </p>
+            <p class="text-gray-400 italic">
+              และนี่คือคำขอบคุณจากนัทและภูเขา ถึงคนที่ทำให้งานนี้เกิดขึ้น
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pop & Ping Cards -->
     <section class="py-12">
       <div class="mx-auto max-w-5xl px-6">
         <div class="grid md:grid-cols-2 gap-8">
@@ -30,23 +60,23 @@ import Navigation from '../components/Navigation.astro'
             <h2 class="text-2xl font-bold text-white mb-2" style="font-family: 'Orbitron', sans-serif;">
               พี่ป๊อบ
             </h2>
-            <p class="text-cyan-400 font-mono text-sm mb-4">Block Mountain Organizer</p>
+            <p class="text-cyan-400 font-mono text-sm mb-4">Block Mountain Founder & Organizer</p>
 
             <div class="space-y-4 text-gray-300 leading-relaxed">
               <p>
-                ขอบคุณที่เชิญนัทมาทุกปี ตั้งแต่ 2019 ถึง 2026
+                ผู้ก่อตั้ง Block Mountain CNX งานรวมตัวคนในวงการ Blockchain และ Tech ที่เชียงใหม่
               </p>
               <p>
-                ขอบคุณที่ถามว่า <span class="text-cyan-400">"หัวข้อปีนี้จะพูดเรื่องอะไร"</span>
+                จัดงานมาทุกปี รวมคนจากทั่วประเทศมาแลกเปลี่ยนความรู้และประสบการณ์
               </p>
               <p>
-                ขอบคุณที่พยักหน้าแล้วพูดว่า <span class="text-purple-400">"นี่แหละที่รอคอย"</span>
+                เป็นคนที่เปิดพื้นที่ให้คนใหม่ๆ ได้มีโอกาสแสดงความสามารถ
               </p>
             </div>
 
             <div class="mt-6 pt-6 border-t border-purple-500/20">
               <p class="text-sm text-gray-500 italic">
-                "Pattern keeper who creates space for pattern breakers"
+                "สร้างพื้นที่ให้คนมาเจอกัน"
               </p>
             </div>
           </div>
@@ -57,23 +87,26 @@ import Navigation from '../components/Navigation.astro'
             <h2 class="text-2xl font-bold text-white mb-2" style="font-family: 'Orbitron', sans-serif;">
               พี่ปิง
             </h2>
-            <p class="text-cyan-400 font-mono text-sm mb-4">Block Mountain Co-Organizer</p>
+            <p class="text-cyan-400 font-mono text-sm mb-4">พัณณ์ชิตา // Block Mountain Co-Organizer</p>
 
             <div class="space-y-4 text-gray-300 leading-relaxed">
               <p>
-                ขอบคุณที่ดูแลงานเบื้องหลัง
+                น้องสาวของพี่ป๊อบ ผู้ร่วมก่อตั้งและดูแลงานเบื้องหลังทั้งหมด
               </p>
               <p>
-                ขอบคุณที่ทำให้ Block Mountain เกิดขึ้นได้ทุกปี
+                คนที่ทำให้ทุกอย่างเกิดขึ้นได้จริง ตั้งแต่การประสานงานไปจนถึงการดูแลผู้เข้าร่วม
               </p>
               <p>
-                ขอบคุณที่เป็นครอบครัว <span class="text-cyan-400">Block Mountain</span>
+                หัวใจสำคัญที่ทำให้ Block Mountain เป็นมากกว่างาน — เป็นครอบครัว
               </p>
             </div>
 
             <div class="mt-6 pt-6 border-t border-cyan-500/20">
-              <p class="text-sm text-gray-500 italic">
-                "Behind every mountain, there's a force that holds it steady"
+              <blockquote class="text-cyan-400 italic text-lg mb-2">
+                "ขอบคุณน้องนัทมากๆ นะคับบบบ"
+              </blockquote>
+              <p class="text-xs text-gray-500 font-mono">
+                — พี่ปิง, 30 Jan 2026
               </p>
             </div>
           </div>
@@ -82,23 +115,48 @@ import Navigation from '../components/Navigation.astro'
       </div>
     </section>
 
-    <!-- Message -->
-    <section class="py-16">
-      <div class="mx-auto max-w-3xl px-6 text-center">
+    <!-- Audio -->
+    <section class="py-8">
+      <div class="mx-auto max-w-3xl px-6">
+        <AudioPlayer
+          src="/audio/thanks/story.mp3"
+          title="🔊 ขอบคุณพี่ป๊อบและพี่ปิง"
+          subtitle="พี่ป๊อบและพี่ปิง สองพี่น้องที่ก่อตั้งบล็อคเมาเทนเชียงใหม่ จัดงานมาทุกปี รวมคนจากทั่วประเทศมาแลกเปลี่ยนกัน สร้างพื้นที่ให้คนใหม่ๆได้มีโอกาส ขอบคุณที่ทำให้บล็อคเมาเทนเป็นครอบครัว"
+        />
+      </div>
+    </section>
+
+    <!-- Block Mountain Info -->
+    <section class="py-12">
+      <div class="mx-auto max-w-3xl px-6">
         <div class="glass rounded-2xl p-8">
-          <p class="text-xl text-gray-300 leading-relaxed mb-6">
-            Block Mountain ไม่ใช่แค่งาน — มันคือครอบครัว
-          </p>
-          <p class="text-lg text-gray-400">
-            พี่ป๊อบและพี่ปิง สร้างพื้นที่ให้คนมาเจอกัน แลกเปลี่ยนกัน เติบโตด้วยกัน
-          </p>
-          <p class="text-lg text-gray-400 mt-4">
-            ปี 2026 นี้ นัทได้นำ Oracle มาแบ่งปัน
-          </p>
-          <p class="text-2xl text-cyan-400 font-bold mt-6" style="font-family: 'Orbitron', sans-serif;">
-            ขอบคุณครับ 🙏
-          </p>
+          <h3 class="text-xl font-bold text-white mb-4" style="font-family: 'Orbitron', sans-serif;">
+            Block Mountain CNX
+          </h3>
+          <div class="space-y-4 text-gray-300 leading-relaxed">
+            <p>
+              งานรวมตัวคนในวงการ Blockchain, Crypto และ Tech ที่เชียงใหม่
+            </p>
+            <p>
+              จัดขึ้นทุกปี เปลี่ยนสถานที่ไปเรื่อยๆ ตามความเหมาะสม
+            </p>
+            <p>
+              ไม่ใช่แค่งาน conference — แต่เป็นที่ที่คนมาเจอกัน แลกเปลี่ยนกัน และเติบโตด้วยกัน
+            </p>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Closing -->
+    <section class="py-12">
+      <div class="mx-auto max-w-3xl px-6 text-center">
+        <p class="text-3xl text-cyan-400 font-bold" style="font-family: 'Orbitron', sans-serif;">
+          ขอบคุณครับ 🙏
+        </p>
+        <p class="text-gray-500 mt-4">
+          Block Mountain 2026
+        </p>
       </div>
     </section>
 
