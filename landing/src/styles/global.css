@@ -108,6 +108,7 @@ body {
 
 .hover-glow {
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .hover-glow:hover {
@@ -127,4 +128,19 @@ body {
 @keyframes gradient-flow {
   0% { background-position: 0% 50%; }
   100% { background-position: 300% 50%; }
+}
+
+/* Accessibility: Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus states for keyboard navigation */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid #00fff2;
+  outline-offset: 2px;
 }
