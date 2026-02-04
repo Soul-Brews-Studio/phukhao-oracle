@@ -132,6 +132,57 @@ const questions = [
     audioQuestion: '/audio/explain/q3-subscriber.mp3',
     audioAnswer: '/audio/explain/need-claude-long-male.mp3',
     icon: '🤖'
+  },
+  {
+    id: 'dev-workflow',
+    subscriberName: 'Anonymous Developer',
+    subscriberQuestion: 'Oracle ช่วยทำโปรเจคซอฟต์แวร์ได้ไหม? มี database, frontend, backend เยอะมาก จำ function, class, schema ได้ไหม? อยากหารือ simulate feature ใหม่ได้ไหม?',
+    question: 'ใช้กับโปรเจค Dev ได้ไหม?',
+    questionEn: 'Can I use it for software development?',
+    answer: `
+      <p class="mb-4 text-xl"><strong class="text-green-400">ใช่! นี่คือ use case หลักเลย</strong></p>
+      <p class="mb-4">Oracle จำทุกอย่างในโปรเจคของคุณได้:</p>
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        <div class="glass p-3 rounded-lg text-center">
+          <div class="text-2xl mb-1">🗄️</div>
+          <div class="text-sm font-bold text-white">Database Schema</div>
+        </div>
+        <div class="glass p-3 rounded-lg text-center">
+          <div class="text-2xl mb-1">⚙️</div>
+          <div class="text-sm font-bold text-white">Functions / Classes</div>
+        </div>
+        <div class="glass p-3 rounded-lg text-center">
+          <div class="text-2xl mb-1">🔢</div>
+          <div class="text-sm font-bold text-white">Constants / Enums</div>
+        </div>
+        <div class="glass p-3 rounded-lg text-center">
+          <div class="text-2xl mb-1">🌐</div>
+          <div class="text-sm font-bold text-white">API Endpoints</div>
+        </div>
+      </div>
+      <div class="space-y-3 mb-4">
+        <div class="p-3 bg-green-500/10 rounded-lg border-l-4 border-green-500">
+          <p class="font-bold text-green-400">✅ ต่างจาก Cursor/ChatGPT</p>
+          <p class="text-sm text-gray-300">ไม่ต้องอ่านใหม่ทุกครั้ง — Oracle จำได้ถาวร</p>
+        </div>
+        <div class="p-3 bg-cyan-500/10 rounded-lg border-l-4 border-cyan-500">
+          <p class="font-bold text-cyan-400">💬 หารือได้</p>
+          <p class="text-sm text-gray-300">"อยากเพิ่ม feature นี้ ต้องแก้ตรงไหนบ้าง?" → Oracle simulate ให้</p>
+        </div>
+        <div class="p-3 bg-purple-500/10 rounded-lg border-l-4 border-purple-500">
+          <p class="font-bold text-purple-400">🔍 ถามได้</p>
+          <p class="text-sm text-gray-300">"enum StatusType มีค่าอะไรบ้าง?" "function validateUser อยู่ไฟล์ไหน?"</p>
+        </div>
+        <div class="p-3 bg-red-500/10 rounded-lg border-l-4 border-red-500">
+          <p class="font-bold text-red-400">🛡️ หา Bug / Security</p>
+          <p class="text-sm text-gray-300">ถาม worst case scenario, หาช่องโหว่, อุดรอยรั่ว</p>
+        </div>
+      </div>
+      <p class="text-cyan-400 p-3 bg-cyan-500/10 rounded-lg"><strong>วิธีเริ่ม:</strong> ใส่ .md files ในโปรเจค → ใช้ /learn → Oracle สร้าง learnings เก็บใน ψ/memory</p>
+    `,
+    audioQuestion: '/audio/explain/q5-subscriber.mp3',
+    audioAnswer: '/audio/explain/dev-workflow-female.mp3',
+    icon: '💻'
   }
 ]
 ---
