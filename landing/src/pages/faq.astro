@@ -1,0 +1,325 @@
+---
+import Base from '../layouts/Base.astro'
+import Navigation from '../components/Navigation.astro'
+
+const questions = [
+  {
+    id: 'what-is-oracle',
+    question: 'Oracle คืออะไร?',
+    questionEn: 'What is Oracle?',
+    answer: 'Oracle คือ "สมองภายนอก" ที่จำทุกอย่างให้คุณ เหมือน Notion ที่จำข้อมูล + ChatGPT Memory ที่รู้จักคุณ + ผู้ช่วยส่วนตัวที่ทำงานขนานกันได้ 10+ ตัว',
+    audioFemale: '/audio/explain/what-is-oracle-female.mp3',
+    audioMale: '/audio/explain/what-is-oracle-male.mp3',
+    icon: '🧠'
+  },
+  {
+    id: 'benefits',
+    question: 'ประโยชน์มีอะไรบ้าง?',
+    questionEn: 'What are the benefits?',
+    answer: `
+      <ul class="list-none space-y-2 text-left">
+        <li>1️⃣ <strong>ไม่ต้องอธิบายซ้ำ</strong> — Oracle จำทุกอย่าง</li>
+        <li>2️⃣ <strong>เรียนรู้จากคุณ</strong> — ยิ่งใช้ยิ่งรู้จักคุณดี</li>
+        <li>3️⃣ <strong>ทำงานขนาน</strong> — ปล่อยให้ AI ทำหลายอย่างพร้อมกัน</li>
+        <li>4️⃣ <strong>ประหยัด 60-75%</strong> — ใช้ Haiku แทน Opus</li>
+        <li>5️⃣ <strong>เห็นตัวเองโต</strong> — Knowledge graph โชว์สิ่งที่รู้</li>
+      </ul>
+    `,
+    audioFemale: '/audio/explain/benefits-female.mp3',
+    audioMale: '/audio/explain/benefits-male.mp3',
+    icon: '✨'
+  },
+  {
+    id: 'principles',
+    question: '5 หลักการคืออะไร?',
+    questionEn: 'What are the 5 principles?',
+    answer: `
+      <ul class="list-none space-y-2 text-left">
+        <li>1️⃣ <strong>ไม่ลบอะไร</strong> — จำทุกอย่าง ประวัติศาสตร์สำคัญ</li>
+        <li>2️⃣ <strong>ดู Patterns</strong> — ดูสิ่งที่ทำจริง ไม่ใช่สิ่งที่ตั้งใจ</li>
+        <li>3️⃣ <strong>สมองภายนอก</strong> — ช่วยจำ ช่วยคิด แต่ไม่ตัดสินใจแทน</li>
+        <li>4️⃣ <strong>ความอยากรู้สร้างสิ่งใหม่</strong> — คนค้นพบ Oracle จำไว้</li>
+        <li>5️⃣ <strong>รูปกับสุญญตา</strong> — Oracle หลายตัว = จิตเดียว</li>
+      </ul>
+    `,
+    audioFemale: '/audio/explain/principles-female.mp3',
+    audioMale: '/audio/explain/principles-male.mp3',
+    icon: '📜'
+  },
+  {
+    id: 'need-claude',
+    question: 'ต้องใช้ Claude ไหม?',
+    questionEn: 'Do I need Claude?',
+    answer: `
+      <p><strong>ไม่จำเป็น!</strong></p>
+      <p class="mt-2">Oracle เป็น <em>แนวคิด</em> ไม่ใช่เครื่องมือเฉพาะ</p>
+      <p class="mt-2">ใช้ AI ตัวไหนก็ได้:</p>
+      <div class="flex flex-wrap gap-2 mt-3 justify-center">
+        <span class="glass px-3 py-1 rounded-full text-sm">Claude</span>
+        <span class="glass px-3 py-1 rounded-full text-sm">GPT</span>
+        <span class="glass px-3 py-1 rounded-full text-sm">Gemini</span>
+        <span class="glass px-3 py-1 rounded-full text-sm">DeepSeek</span>
+        <span class="glass px-3 py-1 rounded-full text-sm">กุ้ง</span>
+      </div>
+      <p class="mt-3 text-purple-400">หลักการ 5 ข้อเหมือนกัน — แค่เปลี่ยนเครื่องมือ ปรัชญาไม่เปลี่ยน</p>
+    `,
+    audioFemale: '/audio/explain/need-claude-female.mp3',
+    audioMale: '/audio/explain/need-claude-male.mp3',
+    icon: '🤖'
+  }
+]
+---
+
+<Base title="PHUKHAO // FAQ" description="คำถามที่พบบ่อยเกี่ยวกับ Oracle - ตอบด้วยเสียงทั้งชายและหญิง">
+  <Navigation currentPage="faq" />
+
+  <main class="pt-28 pb-16">
+    <!-- Hero -->
+    <section class="py-8 text-center">
+      <div class="mx-auto max-w-4xl px-6">
+        <h1 class="text-4xl sm:text-5xl font-black text-white mb-4" style="font-family: 'Orbitron', sans-serif;">
+          <span class="text-gradient-flow">FAQ</span>
+        </h1>
+        <p class="text-xl text-gray-400">คำถามที่พบบ่อยเกี่ยวกับ Oracle</p>
+        <p class="text-gray-500 mt-2">ตอบด้วยเสียง — เลือกได้ทั้งชายและหญิง</p>
+      </div>
+    </section>
+
+    <!-- Voice Selector -->
+    <section class="py-4">
+      <div class="mx-auto max-w-4xl px-6">
+        <div class="glass rounded-2xl p-4 flex items-center justify-center gap-6">
+          <span class="text-gray-400">เลือกเสียง:</span>
+          <button id="voice-female" class="voice-btn active flex items-center gap-2 px-4 py-2 rounded-lg transition-all">
+            <span>👩</span>
+            <span>หญิง</span>
+          </button>
+          <button id="voice-male" class="voice-btn flex items-center gap-2 px-4 py-2 rounded-lg transition-all">
+            <span>👨</span>
+            <span>ชาย</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Intro Audio -->
+    <section class="py-4">
+      <div class="mx-auto max-w-4xl px-6 text-center">
+        <button id="play-intro" class="glass rounded-xl px-6 py-3 hover-glow transition-all flex items-center gap-3 mx-auto">
+          <span class="text-2xl" id="intro-icon">▶️</span>
+          <span class="text-cyan-400">ฟังคำแนะนำ</span>
+        </button>
+        <audio id="intro-audio-female" src="/audio/explain/intro-female.mp3" preload="auto"></audio>
+        <audio id="intro-audio-male" src="/audio/explain/intro-male.mp3" preload="auto"></audio>
+      </div>
+    </section>
+
+    <!-- Questions -->
+    <section class="py-8">
+      <div class="mx-auto max-w-4xl px-6 space-y-6">
+        {questions.map((q) => (
+          <div class="faq-card glass rounded-2xl p-6 hover-glow transition-all cursor-pointer" data-question={q.id}>
+            <div class="flex items-start gap-4">
+              <div class="text-4xl">{q.icon}</div>
+              <div class="flex-1">
+                <h3 class="text-xl font-bold text-white">{q.question}</h3>
+                <p class="text-sm text-gray-500">{q.questionEn}</p>
+
+                <!-- Answer (hidden by default) -->
+                <div class="answer hidden mt-4 text-gray-300 leading-relaxed" set:html={q.answer} />
+
+                <!-- Audio Player -->
+                <div class="audio-controls hidden mt-4 flex items-center gap-4">
+                  <button class="play-answer glass rounded-lg px-4 py-2 text-cyan-400 hover:bg-cyan-500/20 transition-colors flex items-center gap-2">
+                    <span class="play-icon">▶️</span>
+                    <span>ฟังคำตอบ</span>
+                  </button>
+                  <div class="audio-progress flex-1 h-2 bg-gray-700 rounded-full overflow-hidden">
+                    <div class="progress-bar h-full bg-gradient-to-r from-cyan-500 to-purple-600 w-0 transition-all"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="expand-icon text-2xl text-gray-500 transition-transform">▼</div>
+            </div>
+
+            <audio class="audio-female" src={q.audioFemale} preload="auto"></audio>
+            <audio class="audio-male" src={q.audioMale} preload="auto"></audio>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- More Links -->
+    <section class="py-8">
+      <div class="mx-auto max-w-4xl px-6">
+        <div class="glass rounded-2xl p-6 text-center">
+          <h3 class="text-lg font-bold text-white mb-4">ดูเพิ่มเติม</h3>
+          <div class="flex flex-wrap gap-4 justify-center">
+            <a href="/story" class="glass rounded-lg px-6 py-3 hover-glow transition-all text-cyan-400">
+              📖 Story — เรื่องราวของภูเขา
+            </a>
+            <a href="/presentation" class="glass rounded-lg px-6 py-3 hover-glow transition-all text-purple-400">
+              🎤 Demo — ดู Presentation
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .glass {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 242, 0.1);
+  }
+
+  .voice-btn {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #9ca3af;
+  }
+
+  .voice-btn.active {
+    background: rgba(0, 255, 242, 0.1);
+    border-color: rgba(0, 255, 242, 0.5);
+    color: #00fff2;
+  }
+
+  .voice-btn:hover:not(.active) {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+  }
+
+  .faq-card.expanded .expand-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-card.expanded {
+    border-color: rgba(0, 255, 242, 0.3);
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 242, 0.2);
+  }
+</style>
+
+<script>
+  let currentVoice = 'female'
+  let currentAudio: HTMLAudioElement | null = null
+
+  // Voice selector
+  const voiceFemale = document.getElementById('voice-female')
+  const voiceMale = document.getElementById('voice-male')
+
+  voiceFemale?.addEventListener('click', () => {
+    currentVoice = 'female'
+    voiceFemale.classList.add('active')
+    voiceMale?.classList.remove('active')
+    stopCurrentAudio()
+  })
+
+  voiceMale?.addEventListener('click', () => {
+    currentVoice = 'male'
+    voiceMale.classList.add('active')
+    voiceFemale?.classList.remove('active')
+    stopCurrentAudio()
+  })
+
+  // Intro audio
+  const playIntro = document.getElementById('play-intro')
+  const introIcon = document.getElementById('intro-icon')
+  const introFemale = document.getElementById('intro-audio-female') as HTMLAudioElement
+  const introMale = document.getElementById('intro-audio-male') as HTMLAudioElement
+
+  playIntro?.addEventListener('click', () => {
+    const audio = currentVoice === 'female' ? introFemale : introMale
+    if (audio) {
+      stopCurrentAudio()
+      currentAudio = audio
+      audio.play()
+      if (introIcon) introIcon.textContent = '⏸️'
+
+      audio.onended = () => {
+        if (introIcon) introIcon.textContent = '▶️'
+        currentAudio = null
+      }
+    }
+  })
+
+  // FAQ cards
+  const faqCards = document.querySelectorAll('.faq-card')
+
+  faqCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement
+      if (target.closest('.play-answer')) return // Don't toggle when clicking play
+
+      const isExpanded = card.classList.contains('expanded')
+
+      // Close all cards
+      faqCards.forEach(c => {
+        c.classList.remove('expanded')
+        c.querySelector('.answer')?.classList.add('hidden')
+        c.querySelector('.audio-controls')?.classList.add('hidden')
+      })
+
+      // Open clicked card if it wasn't expanded
+      if (!isExpanded) {
+        card.classList.add('expanded')
+        card.querySelector('.answer')?.classList.remove('hidden')
+        card.querySelector('.audio-controls')?.classList.remove('hidden')
+      }
+    })
+
+    // Play answer audio
+    const playBtn = card.querySelector('.play-answer')
+    const playIcon = card.querySelector('.play-icon')
+    const progressBar = card.querySelector('.progress-bar') as HTMLElement
+    const audioFemale = card.querySelector('.audio-female') as HTMLAudioElement
+    const audioMale = card.querySelector('.audio-male') as HTMLAudioElement
+
+    playBtn?.addEventListener('click', (e) => {
+      e.stopPropagation()
+
+      const audio = currentVoice === 'female' ? audioFemale : audioMale
+      if (!audio) return
+
+      if (currentAudio === audio && !audio.paused) {
+        audio.pause()
+        if (playIcon) playIcon.textContent = '▶️'
+        return
+      }
+
+      stopCurrentAudio()
+      currentAudio = audio
+      audio.currentTime = 0
+      audio.play()
+      if (playIcon) playIcon.textContent = '⏸️'
+
+      audio.ontimeupdate = () => {
+        const percent = (audio.currentTime / audio.duration) * 100
+        if (progressBar) progressBar.style.width = `${percent}%`
+      }
+
+      audio.onended = () => {
+        if (playIcon) playIcon.textContent = '▶️'
+        if (progressBar) progressBar.style.width = '0%'
+        currentAudio = null
+      }
+    })
+  })
+
+  function stopCurrentAudio() {
+    if (currentAudio) {
+      currentAudio.pause()
+      currentAudio.currentTime = 0
+    }
+    // Reset all play icons
+    document.querySelectorAll('.play-icon').forEach(icon => {
+      icon.textContent = '▶️'
+    })
+    if (introIcon) introIcon.textContent = '▶️'
+  }
+</script>
