@@ -412,8 +412,10 @@ const questions = [
     })
     card.classList.add('playing')
 
-    // Scroll to card
-    card.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    // Scroll to top of card with offset for navbar
+    const yOffset = -100
+    const y = card.getBoundingClientRect().top + window.pageYOffset + yOffset
+    window.scrollTo({ top: y, behavior: 'smooth' })
 
     if (progressCount) progressCount.textContent = `${index + 1} / ${faqCards.length}`
 
@@ -534,25 +536,53 @@ const questions = [
     })
   })
 
-  // Auto-play from anchor link
-  function checkAnchorAndPlay() {
+  // Auto-play from anchor link (supports #1, #q1, #Q1) - continues through all
+  async function checkAnchorAndPlay() {
     const hash = window.location.hash
-    if (hash && hash.match(/^#q\d+$/)) {
-      const qNum = parseInt(hash.replace('#q', ''))
-      if (qNum >= 1 && qNum <= faqCards.length) {
-        const card = document.getElementById(`q${qNum}`)
-        if (card) {
-          setTimeout(() => {
-            card.scrollIntoView({ behavior: 'smooth', block: 'center' })
-            // Auto-play this question
-            const playBtn = card.querySelector('.play-single') as HTMLButtonElement
-            if (playBtn) {
-              setTimeout(() => playBtn.click(), 500)
-            }
-          }, 300)
+    if (hash) {
+      // Extract number from #1, #q1, #Q1, etc.
+      const match = hash.match(/^#[qQ]?(\d+)$/)
+      if (match) {
+        const startNum = parseInt(match[1])
+        if (startNum >= 1 && startNum <= faqCards.length) {
+          // Start narration from this question
+          isPlaying = true
+          nowPlayingCard?.classList.remove('hidden')
+          if (playAllIcon) playAllIcon.textContent = '⏸️'
+          if (playAllText) playAllText.textContent = 'หยุด'
+
+          // Play from startNum to end
+          for (let i = startNum - 1; i < faqCards.length; i++) {
+            if (!isPlaying) break
+            currentIndex = i
+            await playQuestionWithScroll(i)
+          }
+
+          // Done
+          if (isPlaying) {
+            stopAll()
+            if (currentStatus) currentStatus.textContent = '✅ จบแล้ว!'
+            if (currentQuestion) currentQuestion.textContent = 'ขอบคุณที่รับฟังครับ'
+            setTimeout(() => {
+              nowPlayingCard?.classList.add('hidden')
+            }, 3000)
+          }
         }
       }
     }
+  }
+
+  async function playQuestionWithScroll(index: number) {
+    const card = faqCards[index] as HTMLElement
+
+    // Scroll to top of card with offset for navbar
+    const yOffset = -100
+    const y = card.getBoundingClientRect().top + window.pageYOffset + yOffset
+    window.scrollTo({ top: y, behavior: 'smooth' })
+
+    // Wait for scroll then play
+    await new Promise(r => setTimeout(r, 500))
+    await playQuestion(index)
   }
 
   // Check on load
