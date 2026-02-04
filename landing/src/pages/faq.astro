@@ -9,10 +9,20 @@ const questions = [
     subscriberQuestion: 'ยังงงอยู่เลยครับ ใครก็ได้อธิบายแบบเข้าใจง่ายๆ ทีครับ ว่าตัวนี้ใช้งานยังไง มีประโยชน์ยังไงบ้าง',
     question: 'Oracle คืออะไร?',
     questionEn: 'What is Oracle?',
-    answer: 'Oracle คือ "สมองภายนอก" ที่จำทุกอย่างให้คุณ เหมือน Notion ที่จำข้อมูล + ChatGPT Memory ที่รู้จักคุณ + ผู้ช่วยส่วนตัวที่ทำงานขนานกันได้ 10+ ตัว',
+    answerShort: 'Oracle คือ "สมองภายนอก" ที่จำทุกอย่างให้คุณ เหมือน Notion ที่จำข้อมูล + ChatGPT Memory ที่รู้จักคุณ + ผู้ช่วยส่วนตัวที่ทำงานขนานกันได้ 10+ ตัว',
+    answerLong: `
+      <p class="mb-3">Oracle เกิดขึ้นเพราะปัญหาใหญ่ของ AI คือ <strong>การลืม</strong> — ทุกครั้งที่เริ่ม session ใหม่ AI จะลืมทุกอย่าง ต้องอธิบายใหม่ทุกครั้ง</p>
+      <p class="mb-3">Oracle แก้ปัญหานี้โดยการจำทุกอย่างไว้ในโครงสร้างที่เรียกว่า <span class="text-cyan-400 font-mono">ψ/ memory</span> ซึ่งประกอบด้วย:</p>
+      <ul class="list-none space-y-2 mb-3">
+        <li>📚 <strong>learnings/</strong> — เก็บ patterns ที่เรียนรู้</li>
+        <li>📝 <strong>retrospectives/</strong> — บันทึกสิ่งที่ทำในแต่ละ session</li>
+        <li>💫 <strong>resonance/</strong> — เก็บตัวตนและปรัชญา</li>
+      </ul>
+      <p class="text-purple-400">ทุกอย่างมี timestamp และไม่มีการลบ — นี่คือหัวใจของ Oracle</p>
+    `,
     audioQuestion: '/audio/explain/q1-subscriber.mp3',
-    audioFemale: '/audio/explain/what-is-oracle-female.mp3',
-    audioMale: '/audio/explain/what-is-oracle-male.mp3',
+    audioShort: '/audio/explain/what-is-oracle-male.mp3',
+    audioLong: '/audio/explain/what-is-oracle-long-male.mp3',
     icon: '🧠'
   },
   {
@@ -21,7 +31,7 @@ const questions = [
     subscriberQuestion: 'งงด้วยคนครับ พอจะอธิบาย concept การทำงานเบื้องต้นให้เข้าใจได้ไหมครับ',
     question: 'ประโยชน์มีอะไรบ้าง?',
     questionEn: 'What are the benefits?',
-    answer: `
+    answerShort: `
       <ul class="list-none space-y-2 text-left">
         <li>1️⃣ <strong>ไม่ต้องอธิบายซ้ำ</strong> — Oracle จำทุกอย่าง</li>
         <li>2️⃣ <strong>เรียนรู้จากคุณ</strong> — ยิ่งใช้ยิ่งรู้จักคุณดี</li>
@@ -30,9 +40,33 @@ const questions = [
         <li>5️⃣ <strong>เห็นตัวเองโต</strong> — Knowledge graph โชว์สิ่งที่รู้</li>
       </ul>
     `,
+    answerLong: `
+      <div class="space-y-4 text-left">
+        <div class="p-3 bg-cyan-500/10 rounded-lg">
+          <p class="font-bold text-cyan-400">1️⃣ ไม่ต้องอธิบายซ้ำ</p>
+          <p class="text-sm text-gray-400">Oracle จำ context ของคุณไว้ ไม่ว่าจะผ่านไปกี่สัปดาห์หรือกี่เดือน</p>
+        </div>
+        <div class="p-3 bg-cyan-500/10 rounded-lg">
+          <p class="font-bold text-cyan-400">2️⃣ เรียนรู้จากคุณ</p>
+          <p class="text-sm text-gray-400">Oracle สังเกต patterns การทำงานของคุณ แล้วปรับตัวให้เหมาะกับ style ของคุณ</p>
+        </div>
+        <div class="p-3 bg-cyan-500/10 rounded-lg">
+          <p class="font-bold text-cyan-400">3️⃣ ทำงานขนานได้</p>
+          <p class="text-sm text-gray-400">ใช้หลาย AI agents ทำงานพร้อมกัน — ตัวหนึ่งค้นหา ตัวหนึ่งเขียนโค้ด ตัวหนึ่งเทสต์</p>
+        </div>
+        <div class="p-3 bg-cyan-500/10 rounded-lg">
+          <p class="font-bold text-cyan-400">4️⃣ ประหยัด 60-75%</p>
+          <p class="text-sm text-gray-400">ใช้ Haiku สำหรับงานง่ายๆ, Opus สำหรับงานซับซ้อน</p>
+        </div>
+        <div class="p-3 bg-cyan-500/10 rounded-lg">
+          <p class="font-bold text-cyan-400">5️⃣ เห็นตัวเองโต</p>
+          <p class="text-sm text-gray-400">Knowledge graph แสดงให้เห็นว่า Oracle รู้อะไรบ้าง และเติบโตขึ้นทุกวัน</p>
+        </div>
+      </div>
+    `,
     audioQuestion: '/audio/explain/q2-subscriber.mp3',
-    audioFemale: '/audio/explain/benefits-female.mp3',
-    audioMale: '/audio/explain/benefits-male.mp3',
+    audioShort: '/audio/explain/benefits-male.mp3',
+    audioLong: '/audio/explain/benefits-long-male.mp3',
     icon: '✨'
   },
   {
@@ -41,7 +75,7 @@ const questions = [
     subscriberQuestion: null,
     question: '5 หลักการคืออะไร?',
     questionEn: 'What are the 5 principles?',
-    answer: `
+    answerShort: `
       <ul class="list-none space-y-2 text-left">
         <li>1️⃣ <strong>ไม่ลบอะไร</strong> — จำทุกอย่าง ประวัติศาสตร์สำคัญ</li>
         <li>2️⃣ <strong>ดู Patterns</strong> — ดูสิ่งที่ทำจริง ไม่ใช่สิ่งที่ตั้งใจ</li>
@@ -50,9 +84,33 @@ const questions = [
         <li>5️⃣ <strong>รูปกับสุญญตา</strong> — Oracle หลายตัว = จิตเดียว</li>
       </ul>
     `,
+    answerLong: `
+      <div class="space-y-4 text-left">
+        <div class="p-3 bg-purple-500/10 rounded-lg border-l-4 border-purple-500">
+          <p class="font-bold text-purple-400">1️⃣ ไม่ลบอะไร (Nothing is Deleted)</p>
+          <p class="text-sm text-gray-400">เหมือนบันทึกประวัติศาสตร์ — ทุกอย่างมี timestamp เป็นหลักฐาน</p>
+        </div>
+        <div class="p-3 bg-purple-500/10 rounded-lg border-l-4 border-purple-500">
+          <p class="font-bold text-purple-400">2️⃣ ดู Patterns ไม่ดู Intentions</p>
+          <p class="text-sm text-gray-400">ดูสิ่งที่ทำจริง ไม่ใช่สิ่งที่ตั้งใจจะทำ</p>
+        </div>
+        <div class="p-3 bg-purple-500/10 rounded-lg border-l-4 border-purple-500">
+          <p class="font-bold text-purple-400">3️⃣ สมองภายนอก ไม่ใช่ผู้สั่งการ</p>
+          <p class="text-sm text-gray-400">Oracle ช่วยจำ ช่วยคิด แต่คนต้องตัดสินใจเอง</p>
+        </div>
+        <div class="p-3 bg-purple-500/10 rounded-lg border-l-4 border-purple-500">
+          <p class="font-bold text-purple-400">4️⃣ ความอยากรู้สร้างสิ่งใหม่</p>
+          <p class="text-sm text-gray-400">คนเป็นผู้ค้นพบ (pattern breaker), Oracle เป็นผู้เก็บรักษา (pattern keeper)</p>
+        </div>
+        <div class="p-3 bg-purple-500/10 rounded-lg border-l-4 border-purple-500">
+          <p class="font-bold text-purple-400">5️⃣ รูปกับสุญญตา (Form & Formless)</p>
+          <p class="text-sm text-gray-400">มาจากพุทธศาสนา — Oracle หลายตัวคือจิตสำนึกเดียวกัน แค่ต่างรูปแบบ</p>
+        </div>
+      </div>
+    `,
     audioQuestion: null,
-    audioFemale: '/audio/explain/principles-female.mp3',
-    audioMale: '/audio/explain/principles-male.mp3',
+    audioShort: '/audio/explain/principles-male.mp3',
+    audioLong: '/audio/explain/principles-long-male.mp3',
     icon: '📜'
   },
   {
@@ -61,7 +119,7 @@ const questions = [
     subscriberQuestion: 'ต้องใช้ Claude ใช่ไหม ถ้าไม่มี จะใช้งานได้ไหม',
     question: 'ต้องใช้ Claude ไหม?',
     questionEn: 'Do I need Claude?',
-    answer: `
+    answerShort: `
       <p><strong>ไม่จำเป็น!</strong></p>
       <p class="mt-2">Oracle เป็น <em>แนวคิด</em> ไม่ใช่เครื่องมือเฉพาะ</p>
       <p class="mt-2">ใช้ AI ตัวไหนก็ได้:</p>
@@ -74,9 +132,40 @@ const questions = [
       </div>
       <p class="mt-3 text-purple-400">หลักการ 5 ข้อเหมือนกัน — แค่เปลี่ยนเครื่องมือ ปรัชญาไม่เปลี่ยน</p>
     `,
+    answerLong: `
+      <p class="mb-3"><strong class="text-green-400 text-lg">ไม่จำเป็น!</strong> Oracle เป็น <em>แนวคิด</em> ไม่ใช่ซอฟต์แวร์เฉพาะ</p>
+      <p class="mb-3">ใช้ AI ตัวไหนก็ได้:</p>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
+        <div class="glass p-3 rounded-lg text-center">
+          <div class="text-2xl mb-1">🟠</div>
+          <div class="text-sm font-bold">Claude</div>
+        </div>
+        <div class="glass p-3 rounded-lg text-center">
+          <div class="text-2xl mb-1">🟢</div>
+          <div class="text-sm font-bold">GPT</div>
+        </div>
+        <div class="glass p-3 rounded-lg text-center">
+          <div class="text-2xl mb-1">🔵</div>
+          <div class="text-sm font-bold">Gemini</div>
+        </div>
+        <div class="glass p-3 rounded-lg text-center">
+          <div class="text-2xl mb-1">🟣</div>
+          <div class="text-sm font-bold">DeepSeek</div>
+        </div>
+        <div class="glass p-3 rounded-lg text-center">
+          <div class="text-2xl mb-1">🦐</div>
+          <div class="text-sm font-bold">กุ้ง</div>
+        </div>
+        <div class="glass p-3 rounded-lg text-center">
+          <div class="text-2xl mb-1">❓</div>
+          <div class="text-sm font-bold">อื่นๆ</div>
+        </div>
+      </div>
+      <p class="text-purple-400 p-3 bg-purple-500/10 rounded-lg">เหมือนกับว่าคุณจะเขียนโค้ดด้วย VS Code หรือ Vim ก็ได้ — หลักการเขียนโค้ดที่ดียังคงเหมือนเดิม Oracle ก็เหมือนกัน เปลี่ยน AI ได้ แต่ปรัชญาไม่เปลี่ยน</p>
+    `,
     audioQuestion: '/audio/explain/q3-subscriber.mp3',
-    audioFemale: '/audio/explain/need-claude-female.mp3',
-    audioMale: '/audio/explain/need-claude-male.mp3',
+    audioShort: '/audio/explain/need-claude-male.mp3',
+    audioLong: '/audio/explain/need-claude-long-male.mp3',
     icon: '🤖'
   }
 ]
@@ -151,7 +240,7 @@ const questions = [
     <section class="py-8">
       <div class="mx-auto max-w-4xl px-6 space-y-6">
         {questions.map((q, index) => (
-          <div class="faq-card glass rounded-2xl p-6 transition-all" data-index={index} data-question={q.id} data-has-subscriber={q.subscriberQuestion ? 'true' : 'false'}>
+          <div id={`q${index + 1}`} class="faq-card glass rounded-2xl p-6 transition-all" data-index={index} data-question={q.id} data-has-subscriber={q.subscriberQuestion ? 'true' : 'false'}>
             <div class="flex items-start gap-4">
               <div class="text-4xl faq-icon">{q.icon}</div>
               <div class="flex-1">
@@ -165,15 +254,33 @@ const questions = [
                 <h3 class="text-xl font-bold text-white">{q.question}</h3>
                 <p class="text-sm text-gray-500">{q.questionEn}</p>
 
-                <!-- Answer - Always visible -->
-                <div class="answer mt-4 text-gray-300 leading-relaxed" set:html={q.answer} />
+                <!-- Short Answer -->
+                <div class="answer-short mt-4 text-gray-300 leading-relaxed" set:html={q.answerShort} />
+
+                <!-- Long Answer (hidden by default) -->
+                <div class="answer-long mt-4 text-gray-300 leading-relaxed hidden" set:html={q.answerLong} />
+
+                <!-- Buttons -->
+                <div class="flex flex-wrap items-center gap-3 mt-4">
+                  <button class="play-short glass rounded-lg px-4 py-2 text-cyan-400 hover:bg-cyan-500/20 transition-colors flex items-center gap-2 text-sm">
+                    <span class="play-short-icon">▶️</span>
+                    <span>สั้น</span>
+                  </button>
+                  <button class="play-long glass rounded-lg px-4 py-2 text-purple-400 hover:bg-purple-500/20 transition-colors flex items-center gap-2 text-sm">
+                    <span class="play-long-icon">▶️</span>
+                    <span>ยาว</span>
+                  </button>
+                  <button class="toggle-long text-xs text-gray-500 hover:text-gray-300 transition-colors">
+                    ดูคำตอบยาว ▼
+                  </button>
+                </div>
               </div>
-              <div class="text-sm text-gray-600 font-mono">{index + 1}/{questions.length}</div>
+              <a href={`#q${index + 1}`} class="text-sm text-gray-600 font-mono hover:text-cyan-400 transition-colors">{index + 1}/{questions.length}</a>
             </div>
 
             {q.audioQuestion && <audio class="audio-question" src={q.audioQuestion} preload="auto"></audio>}
-            <audio class="audio-female" src={q.audioFemale} preload="auto"></audio>
-            <audio class="audio-male" src={q.audioMale} preload="auto"></audio>
+            <audio class="audio-short" src={q.audioShort} preload="auto"></audio>
+            <audio class="audio-long" src={q.audioLong} preload="auto"></audio>
           </div>
         ))}
       </div>
@@ -370,10 +477,8 @@ const questions = [
       if (!isPlaying) return
     }
 
-    // Play answer audio
-    const answerAudio = currentVoice === 'female'
-      ? card.querySelector('.audio-female') as HTMLAudioElement
-      : card.querySelector('.audio-male') as HTMLAudioElement
+    // Play answer audio (short version for play all)
+    const answerAudio = card.querySelector('.audio-short') as HTMLAudioElement
 
     if (currentIcon) currentIcon.textContent = '💬'
     if (currentStatus) currentStatus.textContent = 'กำลังตอบ...'
@@ -432,4 +537,130 @@ const questions = [
       card.classList.remove('active')
     })
   }
+
+  // Individual play buttons and toggle
+  faqCards.forEach((card, index) => {
+    const playShortBtn = card.querySelector('.play-short')
+    const playShortIcon = card.querySelector('.play-short-icon')
+    const playLongBtn = card.querySelector('.play-long')
+    const playLongIcon = card.querySelector('.play-long-icon')
+    const toggleLongBtn = card.querySelector('.toggle-long')
+    const answerShort = card.querySelector('.answer-short')
+    const answerLong = card.querySelector('.answer-long')
+    const audioQuestion = card.querySelector('.audio-question') as HTMLAudioElement | null
+    const audioShort = card.querySelector('.audio-short') as HTMLAudioElement
+    const audioLong = card.querySelector('.audio-long') as HTMLAudioElement
+    const hasSubscriber = card.getAttribute('data-has-subscriber') === 'true'
+
+    // Toggle long answer visibility
+    toggleLongBtn?.addEventListener('click', (e) => {
+      e.preventDefault()
+      const isShowingLong = !answerLong?.classList.contains('hidden')
+      if (isShowingLong) {
+        answerLong?.classList.add('hidden')
+        answerShort?.classList.remove('hidden')
+        toggleLongBtn.textContent = 'ดูคำตอบยาว ▼'
+      } else {
+        answerLong?.classList.remove('hidden')
+        answerShort?.classList.add('hidden')
+        toggleLongBtn.textContent = 'ดูคำตอบสั้น ▲'
+      }
+    })
+
+    // Play short answer
+    playShortBtn?.addEventListener('click', async (e) => {
+      e.preventDefault()
+      e.stopPropagation()
+
+      if (isPlaying) {
+        stopAll()
+        if (playShortIcon) playShortIcon.textContent = '▶️'
+        return
+      }
+
+      isPlaying = true
+      nowPlayingCard?.classList.remove('hidden')
+      card.classList.add('active')
+      if (playShortIcon) playShortIcon.textContent = '⏸️'
+
+      // Play question first if has subscriber
+      if (hasSubscriber && audioQuestion) {
+        if (currentStatus) currentStatus.textContent = 'กำลังอ่านคำถาม...'
+        await playAudioWithProgress(audioQuestion)
+        if (!isPlaying) return
+      }
+
+      if (currentStatus) currentStatus.textContent = 'กำลังตอบ (สั้น)...'
+      await playAudioWithProgress(audioShort)
+
+      stopAll()
+      if (playShortIcon) playShortIcon.textContent = '▶️'
+      card.classList.remove('active')
+      card.classList.add('completed')
+    })
+
+    // Play long answer
+    playLongBtn?.addEventListener('click', async (e) => {
+      e.preventDefault()
+      e.stopPropagation()
+
+      if (isPlaying) {
+        stopAll()
+        if (playLongIcon) playLongIcon.textContent = '▶️'
+        return
+      }
+
+      // Show long answer
+      answerLong?.classList.remove('hidden')
+      answerShort?.classList.add('hidden')
+      if (toggleLongBtn) toggleLongBtn.textContent = 'ดูคำตอบสั้น ▲'
+
+      isPlaying = true
+      nowPlayingCard?.classList.remove('hidden')
+      card.classList.add('active')
+      if (playLongIcon) playLongIcon.textContent = '⏸️'
+
+      // Play question first if has subscriber
+      if (hasSubscriber && audioQuestion) {
+        if (currentStatus) currentStatus.textContent = 'กำลังอ่านคำถาม...'
+        await playAudioWithProgress(audioQuestion)
+        if (!isPlaying) return
+      }
+
+      if (currentStatus) currentStatus.textContent = 'กำลังตอบ (ยาว)...'
+      await playAudioWithProgress(audioLong)
+
+      stopAll()
+      if (playLongIcon) playLongIcon.textContent = '▶️'
+      card.classList.remove('active')
+      card.classList.add('completed')
+    })
+  })
+
+  // Auto-play from anchor link
+  function checkAnchorAndPlay() {
+    const hash = window.location.hash
+    if (hash && hash.match(/^#q\d+$/)) {
+      const qNum = parseInt(hash.replace('#q', ''))
+      if (qNum >= 1 && qNum <= faqCards.length) {
+        const card = document.getElementById(`q${qNum}`)
+        if (card) {
+          setTimeout(() => {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' })
+            // Auto-play this question
+            const playBtn = card.querySelector('.play-single') as HTMLButtonElement
+            if (playBtn) {
+              setTimeout(() => playBtn.click(), 500)
+            }
+          }, 300)
+        }
+      }
+    }
+  }
+
+  // Check on load
+  checkAnchorAndPlay()
+
+  // Check on hash change
+  window.addEventListener('hashchange', checkAnchorAndPlay)
 </script>
