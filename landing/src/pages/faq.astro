@@ -5,15 +5,20 @@ import Navigation from '../components/Navigation.astro'
 const questions = [
   {
     id: 'what-is-oracle',
+    subscriberName: 'Anonymous',
+    subscriberQuestion: 'ยังงงอยู่เลยครับ ใครก็ได้อธิบายแบบเข้าใจง่ายๆ ทีครับ ว่าตัวนี้ใช้งานยังไง มีประโยชน์ยังไงบ้าง',
     question: 'Oracle คืออะไร?',
     questionEn: 'What is Oracle?',
     answer: 'Oracle คือ "สมองภายนอก" ที่จำทุกอย่างให้คุณ เหมือน Notion ที่จำข้อมูล + ChatGPT Memory ที่รู้จักคุณ + ผู้ช่วยส่วนตัวที่ทำงานขนานกันได้ 10+ ตัว',
+    audioQuestion: '/audio/explain/q1-subscriber.mp3',
     audioFemale: '/audio/explain/what-is-oracle-female.mp3',
     audioMale: '/audio/explain/what-is-oracle-male.mp3',
     icon: '🧠'
   },
   {
     id: 'benefits',
+    subscriberName: 'Time Liner',
+    subscriberQuestion: 'งงด้วยคนครับ พอจะอธิบาย concept การทำงานเบื้องต้นให้เข้าใจได้ไหมครับ',
     question: 'ประโยชน์มีอะไรบ้าง?',
     questionEn: 'What are the benefits?',
     answer: `
@@ -25,12 +30,15 @@ const questions = [
         <li>5️⃣ <strong>เห็นตัวเองโต</strong> — Knowledge graph โชว์สิ่งที่รู้</li>
       </ul>
     `,
+    audioQuestion: '/audio/explain/q2-subscriber.mp3',
     audioFemale: '/audio/explain/benefits-female.mp3',
     audioMale: '/audio/explain/benefits-male.mp3',
     icon: '✨'
   },
   {
     id: 'principles',
+    subscriberName: null,
+    subscriberQuestion: null,
     question: '5 หลักการคืออะไร?',
     questionEn: 'What are the 5 principles?',
     answer: `
@@ -42,12 +50,15 @@ const questions = [
         <li>5️⃣ <strong>รูปกับสุญญตา</strong> — Oracle หลายตัว = จิตเดียว</li>
       </ul>
     `,
+    audioQuestion: null,
     audioFemale: '/audio/explain/principles-female.mp3',
     audioMale: '/audio/explain/principles-male.mp3',
     icon: '📜'
   },
   {
     id: 'need-claude',
+    subscriberName: 'มนต์ชัย',
+    subscriberQuestion: 'ต้องใช้ Claude ใช่ไหม ถ้าไม่มี จะใช้งานได้ไหม',
     question: 'ต้องใช้ Claude ไหม?',
     questionEn: 'Do I need Claude?',
     answer: `
@@ -63,6 +74,7 @@ const questions = [
       </div>
       <p class="mt-3 text-purple-400">หลักการ 5 ข้อเหมือนกัน — แค่เปลี่ยนเครื่องมือ ปรัชญาไม่เปลี่ยน</p>
     `,
+    audioQuestion: '/audio/explain/q3-subscriber.mp3',
     audioFemale: '/audio/explain/need-claude-female.mp3',
     audioMale: '/audio/explain/need-claude-male.mp3',
     icon: '🤖'
@@ -80,68 +92,86 @@ const questions = [
         <h1 class="text-4xl sm:text-5xl font-black text-white mb-4" style="font-family: 'Orbitron', sans-serif;">
           <span class="text-gradient-flow">FAQ</span>
         </h1>
-        <p class="text-xl text-gray-400">คำถามที่พบบ่อยเกี่ยวกับ Oracle</p>
-        <p class="text-gray-500 mt-2">ตอบด้วยเสียง — เลือกได้ทั้งชายและหญิง</p>
-      </div>
-    </section>
-
-    <!-- Voice Selector -->
-    <section class="py-4">
-      <div class="mx-auto max-w-4xl px-6">
-        <div class="glass rounded-2xl p-4 flex items-center justify-center gap-6">
-          <span class="text-gray-400">เลือกเสียง:</span>
-          <button id="voice-female" class="voice-btn active flex items-center gap-2 px-4 py-2 rounded-lg transition-all">
-            <span>👩</span>
-            <span>หญิง</span>
-          </button>
-          <button id="voice-male" class="voice-btn flex items-center gap-2 px-4 py-2 rounded-lg transition-all">
-            <span>👨</span>
-            <span>ชาย</span>
-          </button>
+        <p class="text-xl text-gray-400">คำถามจากสมาชิก</p>
+        <p class="text-gray-500 mt-2">Oracle อ่านคำถาม แล้วตอบให้ — แบบพรรณา</p>
+        <div class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-purple-500/10 rounded-full border border-purple-500/20">
+          <span class="text-lg">🤖</span>
+          <span class="text-sm text-purple-400">เสียง AI — สร้างโดย Oracle</span>
         </div>
       </div>
     </section>
 
-    <!-- Intro Audio -->
-    <section class="py-4">
-      <div class="mx-auto max-w-4xl px-6 text-center">
-        <button id="play-intro" class="glass rounded-xl px-6 py-3 hover-glow transition-all flex items-center gap-3 mx-auto">
-          <span class="text-2xl" id="intro-icon">▶️</span>
-          <span class="text-cyan-400">ฟังคำแนะนำ</span>
-        </button>
-        <audio id="intro-audio-female" src="/audio/explain/intro-female.mp3" preload="auto"></audio>
-        <audio id="intro-audio-male" src="/audio/explain/intro-male.mp3" preload="auto"></audio>
+    <!-- Main Play Button - Narration Style -->
+    <section class="py-6">
+      <div class="mx-auto max-w-4xl px-6">
+        <div class="glass rounded-2xl p-6 text-center">
+          <button id="play-all" class="group relative inline-flex items-center gap-4 px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-xl font-bold text-black text-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/30">
+            <span class="text-3xl" id="play-all-icon">▶️</span>
+            <span id="play-all-text">เริ่มฟังทั้งหมด</span>
+          </button>
+          <p class="text-sm text-gray-500 mt-4">Oracle จะอ่านคำถามจากสมาชิก แล้วตอบให้ทีละข้อ</p>
+
+          <!-- Voice Toggle -->
+          <div class="flex items-center justify-center gap-4 mt-4">
+            <span class="text-gray-400 text-sm">เสียงตอบ:</span>
+            <button id="voice-female" class="voice-btn flex items-center gap-2 px-3 py-1 rounded-lg transition-all text-sm">
+              <span>👩</span>
+              <span>หญิง</span>
+            </button>
+            <button id="voice-male" class="voice-btn active flex items-center gap-2 px-3 py-1 rounded-lg transition-all text-sm">
+              <span>👨</span>
+              <span>ชาย</span>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Questions -->
+    <!-- Progress Indicator -->
+    <section class="py-2" id="progress-section">
+      <div class="mx-auto max-w-4xl px-6">
+        <div class="glass rounded-xl p-4 hidden" id="now-playing-card">
+          <div class="flex items-center gap-4">
+            <div class="text-3xl animate-pulse" id="current-icon">🎤</div>
+            <div class="flex-1">
+              <div class="text-sm text-gray-400" id="current-status">กำลังอ่านคำถาม...</div>
+              <div class="text-lg text-white font-bold" id="current-question">คำถามที่ 1</div>
+              <div class="text-sm text-purple-400" id="current-from"></div>
+            </div>
+            <div class="text-gray-400" id="progress-count">1 / 4</div>
+          </div>
+          <div class="mt-3 h-2 bg-gray-700 rounded-full overflow-hidden">
+            <div id="main-progress-bar" class="h-full bg-gradient-to-r from-purple-500 to-cyan-500 transition-all" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Questions - All Visible -->
     <section class="py-8">
       <div class="mx-auto max-w-4xl px-6 space-y-6">
-        {questions.map((q) => (
-          <div class="faq-card glass rounded-2xl p-6 hover-glow transition-all cursor-pointer" data-question={q.id}>
+        {questions.map((q, index) => (
+          <div class="faq-card glass rounded-2xl p-6 transition-all" data-index={index} data-question={q.id} data-has-subscriber={q.subscriberQuestion ? 'true' : 'false'}>
             <div class="flex items-start gap-4">
-              <div class="text-4xl">{q.icon}</div>
+              <div class="text-4xl faq-icon">{q.icon}</div>
               <div class="flex-1">
+                {q.subscriberName && (
+                  <div class="mb-3 p-3 bg-purple-500/10 rounded-lg border border-purple-500/20">
+                    <div class="text-xs text-purple-400 mb-1">💬 คำถามจาก {q.subscriberName}:</div>
+                    <p class="text-gray-300 text-sm italic">"{q.subscriberQuestion}"</p>
+                  </div>
+                )}
+
                 <h3 class="text-xl font-bold text-white">{q.question}</h3>
                 <p class="text-sm text-gray-500">{q.questionEn}</p>
 
-                <!-- Answer (hidden by default) -->
-                <div class="answer hidden mt-4 text-gray-300 leading-relaxed" set:html={q.answer} />
-
-                <!-- Audio Player -->
-                <div class="audio-controls hidden mt-4 flex items-center gap-4">
-                  <button class="play-answer glass rounded-lg px-4 py-2 text-cyan-400 hover:bg-cyan-500/20 transition-colors flex items-center gap-2">
-                    <span class="play-icon">▶️</span>
-                    <span>ฟังคำตอบ</span>
-                  </button>
-                  <div class="audio-progress flex-1 h-2 bg-gray-700 rounded-full overflow-hidden">
-                    <div class="progress-bar h-full bg-gradient-to-r from-cyan-500 to-purple-600 w-0 transition-all"></div>
-                  </div>
-                </div>
+                <!-- Answer - Always visible -->
+                <div class="answer mt-4 text-gray-300 leading-relaxed" set:html={q.answer} />
               </div>
-              <div class="expand-icon text-2xl text-gray-500 transition-transform">▼</div>
+              <div class="text-sm text-gray-600 font-mono">{index + 1}/{questions.length}</div>
             </div>
 
+            {q.audioQuestion && <audio class="audio-question" src={q.audioQuestion} preload="auto"></audio>}
             <audio class="audio-female" src={q.audioFemale} preload="auto"></audio>
             <audio class="audio-male" src={q.audioMale} preload="auto"></audio>
           </div>
@@ -192,22 +222,66 @@ const questions = [
     color: #fff;
   }
 
-  .faq-card.expanded .expand-icon {
-    transform: rotate(180deg);
+  .faq-card {
+    opacity: 0.6;
+    transform: scale(0.98);
   }
 
-  .faq-card.expanded {
-    border-color: rgba(0, 255, 242, 0.3);
+  .faq-card.active {
+    opacity: 1;
+    transform: scale(1);
+    border-color: rgba(0, 255, 242, 0.5);
+    box-shadow: 0 0 30px rgba(0, 255, 242, 0.2);
+  }
+
+  .faq-card.completed {
+    opacity: 0.8;
+    border-color: rgba(34, 197, 94, 0.3);
+  }
+
+  .faq-card.completed .faq-icon::after {
+    content: '✓';
+    position: absolute;
+    font-size: 0.5em;
+    bottom: -0.2em;
+    right: -0.2em;
+  }
+
+  .faq-icon {
+    position: relative;
   }
 
   .hover-glow:hover {
     box-shadow: 0 0 20px rgba(0, 255, 242, 0.2);
   }
+
+  @keyframes pulse-border {
+    0%, 100% { border-color: rgba(0, 255, 242, 0.3); }
+    50% { border-color: rgba(0, 255, 242, 0.8); }
+  }
+
+  .faq-card.active {
+    animation: pulse-border 2s ease-in-out infinite;
+  }
 </style>
 
 <script>
-  let currentVoice = 'female'
+  let currentVoice = 'male'
   let currentAudio: HTMLAudioElement | null = null
+  let isPlaying = false
+  let currentIndex = 0
+
+  const faqCards = document.querySelectorAll('.faq-card')
+  const playAllBtn = document.getElementById('play-all')
+  const playAllIcon = document.getElementById('play-all-icon')
+  const playAllText = document.getElementById('play-all-text')
+  const nowPlayingCard = document.getElementById('now-playing-card')
+  const currentIcon = document.getElementById('current-icon')
+  const currentStatus = document.getElementById('current-status')
+  const currentQuestion = document.getElementById('current-question')
+  const currentFrom = document.getElementById('current-from')
+  const progressCount = document.getElementById('progress-count')
+  const mainProgressBar = document.getElementById('main-progress-bar')
 
   // Voice selector
   const voiceFemale = document.getElementById('voice-female')
@@ -217,109 +291,145 @@ const questions = [
     currentVoice = 'female'
     voiceFemale.classList.add('active')
     voiceMale?.classList.remove('active')
-    stopCurrentAudio()
   })
 
   voiceMale?.addEventListener('click', () => {
     currentVoice = 'male'
     voiceMale.classList.add('active')
     voiceFemale?.classList.remove('active')
-    stopCurrentAudio()
   })
 
-  // Intro audio
-  const playIntro = document.getElementById('play-intro')
-  const introIcon = document.getElementById('intro-icon')
-  const introFemale = document.getElementById('intro-audio-female') as HTMLAudioElement
-  const introMale = document.getElementById('intro-audio-male') as HTMLAudioElement
-
-  playIntro?.addEventListener('click', () => {
-    const audio = currentVoice === 'female' ? introFemale : introMale
-    if (audio) {
-      stopCurrentAudio()
-      currentAudio = audio
-      audio.play()
-      if (introIcon) introIcon.textContent = '⏸️'
-
-      audio.onended = () => {
-        if (introIcon) introIcon.textContent = '▶️'
-        currentAudio = null
-      }
+  // Play all - narration style
+  playAllBtn?.addEventListener('click', () => {
+    if (isPlaying) {
+      stopAll()
+    } else {
+      startNarration()
     }
   })
 
-  // FAQ cards
-  const faqCards = document.querySelectorAll('.faq-card')
+  async function startNarration() {
+    isPlaying = true
+    currentIndex = 0
 
-  faqCards.forEach(card => {
-    card.addEventListener('click', (e) => {
-      const target = e.target as HTMLElement
-      if (target.closest('.play-answer')) return // Don't toggle when clicking play
+    if (playAllIcon) playAllIcon.textContent = '⏸️'
+    if (playAllText) playAllText.textContent = 'หยุด'
+    nowPlayingCard?.classList.remove('hidden')
 
-      const isExpanded = card.classList.contains('expanded')
-
-      // Close all cards
-      faqCards.forEach(c => {
-        c.classList.remove('expanded')
-        c.querySelector('.answer')?.classList.add('hidden')
-        c.querySelector('.audio-controls')?.classList.add('hidden')
-      })
-
-      // Open clicked card if it wasn't expanded
-      if (!isExpanded) {
-        card.classList.add('expanded')
-        card.querySelector('.answer')?.classList.remove('hidden')
-        card.querySelector('.audio-controls')?.classList.remove('hidden')
-      }
+    // Reset all cards
+    faqCards.forEach(card => {
+      card.classList.remove('active', 'completed')
     })
 
+    // Play each question
+    for (let i = 0; i < faqCards.length; i++) {
+      if (!isPlaying) break
+      currentIndex = i
+      await playQuestion(i)
+    }
+
+    // Done
+    if (isPlaying) {
+      stopAll()
+      if (currentStatus) currentStatus.textContent = '✅ จบแล้ว!'
+      if (currentQuestion) currentQuestion.textContent = 'ขอบคุณที่รับฟังครับ'
+      if (currentFrom) currentFrom.textContent = ''
+      setTimeout(() => {
+        nowPlayingCard?.classList.add('hidden')
+      }, 3000)
+    }
+  }
+
+  async function playQuestion(index: number) {
+    const card = faqCards[index] as HTMLElement
+    const questionData = getQuestionData(card)
+
+    // Update UI
+    faqCards.forEach((c, i) => {
+      c.classList.remove('active')
+      if (i < index) c.classList.add('completed')
+    })
+    card.classList.add('active')
+
+    // Scroll to card
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' })
+
+    if (progressCount) progressCount.textContent = `${index + 1} / ${faqCards.length}`
+
+    const hasSubscriber = card.getAttribute('data-has-subscriber') === 'true'
+    const audioQuestion = card.querySelector('.audio-question') as HTMLAudioElement | null
+
+    // Play question audio (male voice reads the question)
+    if (hasSubscriber && audioQuestion) {
+      if (currentIcon) currentIcon.textContent = '🎤'
+      if (currentStatus) currentStatus.textContent = 'กำลังอ่านคำถาม...'
+      if (currentQuestion) currentQuestion.textContent = questionData.question
+      if (currentFrom) currentFrom.textContent = `จาก ${questionData.subscriberName}`
+
+      await playAudioWithProgress(audioQuestion)
+      if (!isPlaying) return
+    }
+
     // Play answer audio
-    const playBtn = card.querySelector('.play-answer')
-    const playIcon = card.querySelector('.play-icon')
-    const progressBar = card.querySelector('.progress-bar') as HTMLElement
-    const audioFemale = card.querySelector('.audio-female') as HTMLAudioElement
-    const audioMale = card.querySelector('.audio-male') as HTMLAudioElement
+    const answerAudio = currentVoice === 'female'
+      ? card.querySelector('.audio-female') as HTMLAudioElement
+      : card.querySelector('.audio-male') as HTMLAudioElement
 
-    playBtn?.addEventListener('click', (e) => {
-      e.stopPropagation()
+    if (currentIcon) currentIcon.textContent = '💬'
+    if (currentStatus) currentStatus.textContent = 'กำลังตอบ...'
+    if (currentQuestion) currentQuestion.textContent = questionData.question
+    if (currentFrom) currentFrom.textContent = ''
 
-      const audio = currentVoice === 'female' ? audioFemale : audioMale
-      if (!audio) return
+    await playAudioWithProgress(answerAudio)
 
-      if (currentAudio === audio && !audio.paused) {
-        audio.pause()
-        if (playIcon) playIcon.textContent = '▶️'
-        return
-      }
+    // Mark as completed
+    card.classList.remove('active')
+    card.classList.add('completed')
+  }
 
-      stopCurrentAudio()
+  function getQuestionData(card: Element) {
+    const subscriberName = card.querySelector('.text-purple-400.mb-1')?.textContent?.replace('💬 คำถามจาก ', '').replace(':', '') || 'Oracle'
+    const question = card.querySelector('h3')?.textContent || 'คำถาม'
+    return { subscriberName, question }
+  }
+
+  function playAudioWithProgress(audio: HTMLAudioElement): Promise<void> {
+    return new Promise((resolve) => {
       currentAudio = audio
       audio.currentTime = 0
-      audio.play()
-      if (playIcon) playIcon.textContent = '⏸️'
 
       audio.ontimeupdate = () => {
         const percent = (audio.currentTime / audio.duration) * 100
-        if (progressBar) progressBar.style.width = `${percent}%`
+        if (mainProgressBar) mainProgressBar.style.width = `${percent}%`
       }
 
       audio.onended = () => {
-        if (playIcon) playIcon.textContent = '▶️'
-        if (progressBar) progressBar.style.width = '0%'
         currentAudio = null
+        resolve()
       }
-    })
-  })
 
-  function stopCurrentAudio() {
+      audio.onerror = () => {
+        currentAudio = null
+        resolve()
+      }
+
+      audio.play().catch(() => resolve())
+    })
+  }
+
+  function stopAll() {
+    isPlaying = false
     if (currentAudio) {
       currentAudio.pause()
       currentAudio.currentTime = 0
+      currentAudio = null
     }
-    // Reset all play icons
-    document.querySelectorAll('.play-icon').forEach(icon => {
-      icon.textContent = '▶️'
+    if (playAllIcon) playAllIcon.textContent = '▶️'
+    if (playAllText) playAllText.textContent = 'เริ่มฟังทั้งหมด'
+    if (mainProgressBar) mainProgressBar.style.width = '0%'
+
+    faqCards.forEach(card => {
+      card.classList.remove('active')
     })
-    if (introIcon) introIcon.textContent = '▶️'
   }
 </script>
